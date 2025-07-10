@@ -8,6 +8,22 @@
 
 - [Golang Tutorial: YouTube video tutorial](https://www.youtube.com/watch?v=YzLrWHZa-Kc)
 
+- [How to Write Go Code](https://go.dev/doc/code)
+
+- [Effective Go](https://go.dev/doc/effective_go)
+
+- [Go By Example](https://gobyexample.com/)
+
+- [Awesome Go](https://github.com/avelino/awesome-go)
+
+- https://dev.to/aurelievache/learning-go-by-examples-introduction-448n
+
+- https://golangbot.com/learn-golang-series/
+
+- https://github.com/dariubs/GoBooks
+
+- https://goperf.dev/
+
 ## Notes
 
 ### From "A tour of Go"
@@ -197,3 +213,5 @@
   - [Go Math Package](https://pkg.go.dev/time)
   - `time.Now()`
   - `time.Date(...)`
+
+## Build an executable without debug (smaller size)
