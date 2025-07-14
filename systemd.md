@@ -8,9 +8,13 @@
 
 - [Arch Wiki](https://wiki.archlinux.org/title/Systemd)
 
+- [Systemd by example](https://systemd-by-example.com/)
+
+- [Red Hat Docs](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_systemd_unit_files_to_customize_and_optimize_your_system/assembly_working-with-systemd-unit-files_working-with-systemd)
+
 ## Units
 
-- Services (Daemons) [Uses `systemctl`]
+- Services (Daemons/Units) [Uses `systemctl`]
 - Timers (similar to Cron)
 - Mounts (File system mounts, from /etc/fstab)
 - Devices
