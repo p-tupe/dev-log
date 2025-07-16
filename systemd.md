@@ -110,7 +110,7 @@
 
 - Clear up old logs
 
-  ```shh
+  ```ssh-config
   # Check size
   journalctl --disk-usage
 

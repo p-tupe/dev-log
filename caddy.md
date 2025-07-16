@@ -48,7 +48,7 @@ volumes:
 
 [Caddyfile](https://caddyserver.com/docs/caddyfile-tutorial) for reverse-proxy is:
 
-```Caddyfile
+```nginx
 # The entirety of ngnix nextcloud config turned into this:
 
 nextcloud.mydomain.com {
@@ -76,7 +76,7 @@ $ docker exec -w /etc/caddy caddy_caddy_1 caddy reload
 
 Adding multiple reverse-proxy routes on same domain:
 
-```Caddyfile
+```nginx
 api.mydomain.com {
     route /routeone/* {
         reverse_proxy localhost:8080
@@ -96,7 +96,7 @@ $ docker run -it --rm -w /etc/caddy caddy:<ver> caddy hash-password
 
 This gives us a hased password, which we add like so:
 
-```Caddyfile
+```nginx
 secureroute.mydomain.com {
   basicauth * {
       username <hash-string>

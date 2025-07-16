@@ -25,7 +25,7 @@ _pstopdf may be names ps2pdf on other OSes_
 
 - Alternative undo redo
 
-```vi
+```vim
 :earlier __time__
 :later __time__
 ```
@@ -36,7 +36,7 @@ to go back and forth on state of buffer in time of x units
 
 - Remote editing (using ssh config)
 
-```vi
+```vim
 :e scp://staging/~/path/to/file.ext
 ```
 
@@ -44,7 +44,7 @@ _Assuming a Host for 'staging' is set in ~/.ssh/config_
 
 - Delete other buffers except current
 
-```vi
+```vim
 :% bd | e # | bd #
 ```
 
@@ -62,7 +62,7 @@ TAB cycles through options; Ctrl-a inputs all options.
 
 Example: To delete all \*.js files in buffer list
 
-```vi
+```vim
 :bd js Ctrl-a
 ```
 
