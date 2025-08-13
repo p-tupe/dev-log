@@ -24,6 +24,8 @@
 
 - https://goperf.dev/
 
+- https://antonz.org/go-concurrency/#contents
+
 ## Notes
 
 ### From "A tour of Go"
@@ -214,4 +216,24 @@
   - `time.Now()`
   - `time.Date(...)`
 
-## Build an executable without debug (smaller size)
+## How to
+
+### Structure a project?
+
+### Write a minimal webserver?
+
+### Parse CLI flags/subcommands?
+
+### Use go:stringer, and when?
+
+### Use go:embed, and when?
+
+### Use slog?
+
+### Use templates?
+
+### Use templ?
+
+### Use HTMX?
+
+### Build a smaller binary?

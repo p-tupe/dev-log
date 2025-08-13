@@ -123,7 +123,7 @@
   ```sh
   mkdir <repo>; cd <repo>
   git clone --bare <remote>
-  echo "gitdir: ./." > .git
+  mv <repo>.git .git
   git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
   git fetch origin
   git worktree add <branch>
