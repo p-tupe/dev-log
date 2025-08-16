@@ -1,0 +1,25 @@
+.preview {
+  border: 1px solid;
+  padding: 1em;
+  background: #eee;
+}
+.preview h1 {
+  margin: 0;
+}
+super-slider {
+  display: flex;
+  align-items: center;
+  margin-block: 1em;
+}
+super-slider input[type="range"] {
+  margin-inline: 0.25em 1px;
+}
+super-slider .readout {
+  width: 3em;
+  margin-inline: 0.25em;
+  padding-inline: 0.5em;
+  border: 1px solid #0003;
+  background: #eee;
+  font: 1em monospace;
+  text-align: center;
+}

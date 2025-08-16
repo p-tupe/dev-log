@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="slider/slider.css" />
+  </head>
+
+  <body>
+
+    <super-slider unit="em" target=".preview h1">
+      <label for="title-size">Title font size</label>
+      <input
+        id="title-size"
+        type="range"
+        min="0.5"
+        max="4"
+        step="0.1"
+        value="2"
+      />
+    </super-slider>
+
+    <div class="preview">
+      <h1>This is a small demonstration of building web components</h1>
+    </div>
+
+    <script src="slider/slider.js" ></script>
+  </body>
+</html>
