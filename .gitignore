@@ -1,2 +1,5 @@
 .debris
 .DS_Store
+tmp
+build
+out
