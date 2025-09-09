@@ -33,11 +33,18 @@ func main() {
 
 	auth := smtp.PlainAuth("", Username, Password, Host)
 
-	http.HandleFunc("GET /", func(w http.ResponseWriter, _ *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type,Authorization")
 		w.WriteHeader(http.StatusOK)
 	})
 
 	http.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+
 		key := r.Header.Get("Authorization")
 
 		if key != AuthKey {
