@@ -1,7 +1,7 @@
 // This example demonstrates the idiomatic way of generating
 // enums in go.
 //
-// Before running `go run .` go a quick `go generate` to create
+// Before running `go run .` do a quick `go generate` to create
 // required files using stringer.
 package main
 

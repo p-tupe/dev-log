@@ -1,4 +1,6 @@
 // This program demonstrates different ways to read a file
+//
+// Usage: `go run main.go`
 package main
 
 import (

@@ -1,0 +1,9 @@
+[Unit]
+Description=a simple mail server in go
+
+[Service]
+ExecStart=/home/ubuntu/go-mail-server/app
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
