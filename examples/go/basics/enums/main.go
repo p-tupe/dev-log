@@ -11,9 +11,13 @@ import "fmt"
 type Season int
 
 const (
+	// iota is a keyword that starts at x (default 0)
+	// and increments at every step
 	Unknown Season = iota
 
+	// So winter will be 1
 	Winter
+	// Summer will be 2, and so on
 	Summer
 	Monsoon
 	Fall
