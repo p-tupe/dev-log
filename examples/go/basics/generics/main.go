@@ -1,7 +1,10 @@
 // This package shows some of the use cases of generic types.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 // To start with, say we want a sum function that only works for either int or float64
 func StrictSum[Number int | float64](x, y Number) {
@@ -25,13 +28,14 @@ func LessStrictSum[Number ~int | ~float64](x, y Number) {
 // Then it would accept _any_ type T, including Filter("some string"...
 // which is not what we want.
 func Filter[Slice ~[]Type, Type any](arr Slice, fn func(x Type) bool) []Type {
-	newArr := make([]Type, 0, len(arr)/2)
+	newArr := make([]Type, 0, len(arr))
 	for _, x := range arr {
 		if fn(x) {
 			newArr = append(newArr, x)
 		}
 	}
-	return newArr
+	// Clip ensures len(arr) == cap(arr)
+	return slices.Clip(newArr)
 }
 
 func main() {
