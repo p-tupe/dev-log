@@ -1,8 +1,11 @@
+// This program shows how to generate text strings from a seed text using markov chain.
+//
+//	https://en.wikipedia.org/wiki/Markov_chain
 package main
 
 import (
 	"fmt"
-	"math/rand"
+	"slices"
 	"strings"
 )
 
@@ -12,62 +15,63 @@ Markov chains have many applications as statistical models of real-world process
 
 The adjectives Markovian and Markov are used to describe something that is related to a Markov process.`
 
-type Chain = map[string]map[string]int
+type Link struct {
+	count int
+	node  *Node
+}
+
+type Node struct {
+	value string
+	links []Link
+}
 
 func main() {
-	chain := input(SEED_TEXT)
-	output(chain, "A", 500)
-}
+	fmt.Println("*** Markov Chain Text Generator ***")
 
-func input(seedTxt string) Chain {
-	chain := Chain{}
-	words := strings.Fields(seedTxt)
-
-	for i, currWord := range words {
-		nextWord := ""
-		if i < len(words)-1 {
-			nextWord = words[i+1]
+	prevWord := ""
+	mappedWords := map[string]*Node{}
+	for currWord := range strings.FieldsSeq(SEED_TEXT) {
+		if prevWord == "" {
+			prevWord = currWord
+			continue
 		}
 
-		if chain[currWord] == nil {
-			chain[currWord] = map[string]int{}
+		var prevNode *Node
+
+		if mappedWords[prevWord] == nil {
+			prevNode = &Node{
+				value: prevWord,
+				links: []Link{},
+			}
+			mappedWords[prevWord] = prevNode
+		} else {
+			prevNode = mappedWords[prevWord]
 		}
 
-		chain[currWord][nextWord]++
+		idx := slices.IndexFunc(prevNode.links, func(l Link) bool {
+			return l.node.value == currWord
+		})
+
+		if idx != -1 {
+			prevNode.links[idx].count += 1
+		} else {
+			prevNode.links = append(prevNode.links, Link{count: 1, node: &Node{
+				value: currWord,
+				links: []Link{},
+			}})
+		}
+
+		prevWord = currWord
 	}
 
-	return chain
-}
-
-func output(chain Chain, word string, count int) {
-	if count == 0 {
-		return
-	}
-
-	fmt.Print(word + " ")
-
-	node := chain[word]
-
-	if node == nil {
-		return
-	}
-
-	max := 0
-	for _, count := range node {
-		max += count
-	}
-
-	rand := rand.Intn(max)
-
-	sum := 0
-	for nextWord, count := range node {
-		sum += count
-
-		if sum > rand {
-			word = nextWord
+	word := "and"
+	next := mappedWords[word]
+	for range 200 {
+		fmt.Print(next.value + " ")
+		if len(next.links) > 0 {
+			next = next.links[0].node
+		} else {
 			break
 		}
 	}
-
-	output(chain, word, count-1)
 }

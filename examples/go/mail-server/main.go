@@ -25,6 +25,15 @@ var (
 	AuthKey = "some-random-string"
 )
 
+func middleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+		next(w, r)
+	}
+}
+
 func main() {
 	if Username == "" || Password == "" || Host == "" || Port == "" || From == "" || To[0] == "" {
 		slog.Error("Required variables not found!")
@@ -33,18 +42,11 @@ func main() {
 
 	auth := smtp.PlainAuth("", Username, Password, Host)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Add("Access-Control-Allow-Origin", "*")
-		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
-		w.Header().Add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+	http.HandleFunc("/", middleware(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
-	})
+	}))
 
-	http.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Access-Control-Allow-Origin", "*")
-		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
-		w.Header().Add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-
+	http.HandleFunc("POST /", middleware(func(w http.ResponseWriter, r *http.Request) {
 		key := r.Header.Get("Authorization")
 
 		if key != AuthKey {
@@ -72,7 +74,7 @@ func main() {
 		}
 
 		w.WriteHeader(http.StatusAccepted)
-	})
+	}))
 
 	slog.Info("Mail Server listening on :8080")
 	http.ListenAndServe(":8080", nil)
