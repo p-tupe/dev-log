@@ -3,7 +3,6 @@
  *
  * It takes in a seed text to model markov chains with probability paths.
  * To generate text, it takes in a starting word and number of words to generate.
- *
  */
 class MarkovChain {
   #model = {};

@@ -25,11 +25,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer func() {
-		if err := outFile.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	defer outFile.Close()
 
 	for {
 		fmt.Println("Fetching: ", url)
@@ -48,7 +44,9 @@ func main() {
 		outFile.Write([]byte("\n\n\t***\n\n" + content.Text() + "\n\n"))
 
 		for _, s := range doc.Find("a.btn-primary").EachIter() {
-			isNextBtn := strings.Contains(s.Text(), "Next Chapter")
+			content := s.Text()
+			content = strings.ReplaceAll(content, "\n", "\n\n")
+			isNextBtn := strings.Contains(content, "Next Chapter")
 			if isNextBtn {
 				nextUrl, exists := s.Attr("href")
 				if exists {

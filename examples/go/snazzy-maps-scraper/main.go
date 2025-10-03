@@ -5,6 +5,7 @@ package main
 
 import (
 	"errors"
+	"io"
 	"io/fs"
 	"net/http"
 	"os"
@@ -52,9 +53,8 @@ func fetchAndParse(url string, w *sync.WaitGroup) {
 	defer resp.Body.Close()
 	panicIfErr(err)
 
-	doc.Find("pre#style-json").Each(func(i int, s *goquery.Selection) {
-		outputFile.WriteString(s.Text())
-	})
+	jsonBlock := doc.Find("pre#style-json")
+	io.WriteString(outputFile, jsonBlock.Text())
 }
 
 func panicIfErr(err error) {

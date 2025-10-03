@@ -1,4 +1,4 @@
-// This code shows how to read/write a json file
+// Package parse-json shows how to read/write a json file
 // https://pkg.go.dev/encoding/json
 package main
 
@@ -37,7 +37,8 @@ func readJSONFromFile() {
 
 	// This is for when you do know/care about JSON structure in advance (IS type-safe)
 	typedSchema := struct {
-		SomeKey string `json:"some-key"`
+		SomeKey   string `json:"some-key"`
+		IgnoreKey string `json:",omitempty"`
 	}{}
 	err = json.Unmarshal(file, &typedSchema)
 	panicIfErr(err)

@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -66,6 +67,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
-	resp, err := http.Post(WEBHOOK_URL, "application/json", bytes.NewBuffer(jsonData))
-	w.Write([]byte(resp.Status))
+	resp, err := http.Post(WEBHOOK_URL, "application/json", bytes.NewReader(jsonData))
+	io.WriteString(w, resp.Status)
 }
