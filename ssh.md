@@ -7,7 +7,6 @@
   ```
 
 - Setup keys (no password login)
-
   - Generate keys on client
 
     ```shell
@@ -86,3 +85,12 @@
     ...
     Identity ~/.ssh/<key-name>
   ```
+
+## Running local scripts on remote host
+
+```bash
+ssh user@server 'bash -s' <<'EOF'
+# ...commands
+whoami
+EOF
+```
