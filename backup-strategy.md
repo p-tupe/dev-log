@@ -1,3 +1,6 @@
+---
+modified: Wed Nov  8 20:03:05 EST 2023
+---
 # Backup Strategy
 
 > Everything worth backing up follows 3-2-1 strategy : Atleast 3 copies, 2 local and 1 remote

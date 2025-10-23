@@ -1,3 +1,6 @@
+---
+modified: Wed Jul 16 11:16:20 EDT 2025
+---
 # Caddy
 
 > Caddy is a web server with automatic certificate renewal and http to https routing.

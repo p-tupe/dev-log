@@ -1,3 +1,6 @@
+---
+modified: Thu Sep 15 09:51:42 EDT 2022
+---
 # rsync (Remote Sync)
 
 From `man rsync`:

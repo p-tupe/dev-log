@@ -1,3 +1,6 @@
+---
+modified: Wed Aug 13 09:41:01 EDT 2025
+---
 # Go
 
 - [Official Site](https://golang.org)

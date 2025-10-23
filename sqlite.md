@@ -1,3 +1,6 @@
+---
+modified: Mon Nov 14 23:06:32 EST 2022
+---
 # Sqlite 3
 
 ## Cli shell commands

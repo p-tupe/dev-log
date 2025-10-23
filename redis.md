@@ -1,3 +1,6 @@
+---
+modified: Wed Jan  3 21:23:27 EST 2024
+---
 # Redis
 
 - [Official Site](https://redis.io/)

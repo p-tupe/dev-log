@@ -1,3 +1,6 @@
+---
+modified: Thu Oct 23 18:36:48 EDT 2025
+---
 # Git
 
 ## Stash
@@ -15,7 +18,6 @@
 - Save with a specific name: `git stash save <name>`
 
 - Apply a specific stash: `git stash apply <n>`
-
   - where "n" is the stash@{n} you see after listing all stashes
 
 ## Rebase
@@ -130,3 +132,11 @@
   ```
 
 - Worktree commands help: `git worktree help`
+
+## Log
+
+Git log can be used in conjunction with `touch` command to reset file timestamps to match their last motified times:
+
+```bash
+touch -d $(git log -1 --pretty="format:%ad" --date=format:'%Y-%m-%d%H:%M:%S' $file) $file
+```

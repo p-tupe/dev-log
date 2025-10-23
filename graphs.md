@@ -1,3 +1,6 @@
+---
+modified: Thu Oct 27 11:56:20 EDT 2022
+---
 # Graphs
 
 - Collection of nodes/vertices and connecting edges

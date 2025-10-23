@@ -1,3 +1,6 @@
+---
+modified: Fri Oct  7 13:07:29 EDT 2022
+---
 # Bulma
 
 > Bulma is a free, open source framework that provides ready-to-use frontend components that you can easily combine to build responsive web interfaces.

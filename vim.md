@@ -1,3 +1,6 @@
+---
+modified: Thu Oct 23 15:11:03 EDT 2025
+---
 # (NEO)VIM
 
 - Redirect output of Ex commands to register

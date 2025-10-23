@@ -1,3 +1,6 @@
+---
+modified: Wed Jun  1 21:19:07 EDT 2022
+---
 # Janet
 
 > Janet is a functional (and imperative) cross-platform interpreted (and compiled) lisp-inspired language with batteries-included api that makes a good system scripting language, or a language to embed in other programs.

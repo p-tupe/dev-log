@@ -1,3 +1,6 @@
+---
+modified: Thu Oct 23 12:48:34 EDT 2025
+---
 ## Android emulator cli
 
 - [Source](https://developer.android.com/studio/run/emulator-commandline)

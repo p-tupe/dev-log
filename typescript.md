@@ -1,3 +1,6 @@
+---
+modified: Wed Sep  3 19:56:25 EDT 2025
+---
 # Typescript
 
 > JavaScript with types

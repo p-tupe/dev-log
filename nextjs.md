@@ -1,3 +1,6 @@
+---
+modified: Sun Jan 29 19:34:45 EST 2023
+---
 # Nextjs
 
 > Full stack React framework

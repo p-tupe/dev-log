@@ -1,3 +1,6 @@
+---
+modified: Thu Oct 23 15:11:03 EDT 2025
+---
 # Shell (bash | zsh)
 
 - Using a default value for a variable
