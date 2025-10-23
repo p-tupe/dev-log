@@ -88,6 +88,12 @@
 
 ## Running local scripts on remote host
 
+- [Source](https://sqlpey.com/shell/execute-local-scripts-remote-ssh/)
+
+```bash
+ssh user@server 'bash -s' < local_script.sh
+```
+
 ```bash
 ssh user@server 'bash -s' <<'EOF'
 # ...commands

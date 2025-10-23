@@ -1,4 +1,4 @@
-module RoyalRoadScraper
+module royal-road-scraper
 
 go 1.24.2
 

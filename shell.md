@@ -1,4 +1,4 @@
-# Shell
+# Shell (bash | zsh)
 
 - Using a default value for a variable
 
@@ -298,139 +298,28 @@
 
   - The KILL signal does not have ANY possibility of the being resisted. It always works because a KILL signal cannot be handled. This is both its blessing and its curse. It is signal number 9.
 
-## curl
+- Using args
 
-- Send an email using gmail smtp
+```bash
+argsfn() {
+    echo "number of args: $#"
+    echo "list of args: $@"
+    echo "name of script: $0"
 
-  ```sh
-  curl --ssl-reqd \
-    --url smtp://smtp.gmail.com \
-    --mail-from sender@gmail.com \
-    --mail-rcpt recipient@mail.com \
-    --user "sender@gmail.com:apppassword" \
-    --upload-file mail.txt
-  ```
+    if [ "$#" -ne 3 ]; then
+        echo "usage: $0 arg1 arg2 arg3"
+        exit(1)
+    fi
 
-  where mail.txt:
+    echo "first arg: $1"
+    echo "second arg: $2"
+    echo "third arg: $3"
+}
+```
 
-  ```txt
-  From: Sender Name <sender@gmail.com>
-  To: Recipient Name <recipient@mail.com>
-  Subject: an example.com example email
-  Date: Mon, 5 Nov 1994 12:10:00
+- Using flags [getopt](https://mywiki.wooledge.org/BashFAQ/035#getopts)
 
-  Dear Recipient,
-  This is an example email.
-  ```
-
-## ffmpeg
-
-- Convert a mov to mp4 (with compression):
-
-  ````sh
-  ffmpeg -i video.mov -vcodec h264 -acodec mp2 video.mp4
-  ```
-
-  ````
-
-- Trim media from/to
-
-  ```sh
-  ffmpeg -ss <start_seconds> -i "input.mp3" -t <end_second> "output.mp3"
-  ```
-
-## vlc [cli mode]
-
-- Start vlc with ncurses interface
-
-  ```sh
-    vlc --intf ncurses --random --loop --audio --recursive --no-video ~/Music/
-  ```
-
-  - `recursive` is so subdirs in playlist expand instead of just sitting there; gui is preferences > all > playlist > subdir behav > expand
-
-## Youtuble Download
-
-- Download songs from youtube using [youtube-dl](https://youtube-dl.org/)
-
-  Only audio:
-
-  ```sh
-  yt-dlp --ignore-errors --format bestaudio --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' [--yes-playlist] <"URL" | --batch-file  ./fileName>
-  ```
-
-  _where fileName is a list of urls separated by blank lines;_
-
-  Best video+audio:
-
-  ```sh
-  yt-dlp --ignore-errors --format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4  -o '%(title)s.%(ext)s' <"video-link">
-  ```
-
-  Note the brackets for the above are part of the command.
-
-## gpg
-
-- Encrypt file for self
-
-  ```sh
-  gpg --encrypt ["name" | --recipient <self@mail.com>] <file>
-  ```
-
-  This will create an encryped `<file>.gpg` file in same directory. Opening it normally will show gibberish.
-
-- Decrypt a file
-
-  ```sh
-  gpg --decrypt <file>.gpg
-  ```
-
-  This will ask for your gpg passphrase and output the original `<file>`.
-
-- Export public key to server (so can encrypt files there)
-
-  ```sh
-  gpg --armor --export <self@mail.com> > pub.key
-  ```
-
-  - Copy `pub.key` to server (via scp or copy-paste), then
-
-  ```sh
-  gpg --import pub.key
-  ```
-
-## beets
-
-- Seek help
-
-  ```shell
-  $ beet help [command]
-  ```
-
-- For all tracks in albumFolder, import metadata, fix filenames and copy to Dir:
-
-  ```shell
-  $ beet -d ~/Dir import [-S <url>] [-s <file> | -g <folder>]
-  ```
-
-  where  
-  \-S - Source URL (musicbrainz)
-  \-s - Import as single track (Artist -> Track)
-  \-g - Import as album (Album -> Track)
-
-## Android emulator cli
-
-- [Source](https://developer.android.com/studio/run/emulator-commandline)
-
-- Emulator bin path (macos): `$ANDROID_HOME/emulator/emulator`
-
-- List available devices: `emulator -list-avds`
-
-- Start an emulator: `emulator @<device_name>`
-
-- Some useful options: `emulator @<device> -no-boot-anim -memory <size> -logcat <regex>`
-
-## SSHFS (macos setup)
+## SSHFS (macos)
 
 ```bash
 $ brew install --cask macfuse
@@ -441,47 +330,15 @@ $ sshfs -o allow_other,default_permissions <server-dir> <local-dir> # follow pro
 
 > On linux, sshfs should be preinstalled, if not just use default package manager
 
-## Notify (macos)
+## Notifications
 
 ```bash
-osascript -e 'display notification "Notification text" with title "Title"'
-```
-
-## Screen
-
-```sh
-# ssh into remote server
-ssh remote-server
-
-# start screen
-screen
-
-# screen help
-<c-a>?
-
-# create a new window
-<C-a>c
-
-# Switch between windows by number
-<C-a>0
-<C-a>1..9
-
-# Switch
-<C-a>n # to next
-<C-a>p # or previous window
-
-# Create a new window in split
-<C-a>| && <C-a><Tab> && <C-a>c # Vertical
-<C-a>S && <C-a><Tab> && <C-a>c # Horizontal
-
-# Close all splits
-<C-a>Q
-```
-
-## sed (stream editor)
-
-- Add an extra line for each line break in a file
-
-```sh
-echo "Line 1\nLine 2" | sed "G"
+notify() {
+if [[ `uname` == Darwin ]]; then
+    osascript -e 'display notification "Notification text" with title "Title"'
+else
+# TODO linux
+# notify "Notification Text"
+fi
+}
 ```

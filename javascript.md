@@ -10,69 +10,6 @@
 
 ## Notes
 
-### Variables
-
-- Declaration:
-  - var: Function Scope (hoised), Variable, Redeclarable
-  - let: block scope, Variable, Not Redeclarable
-  - const: block scope, Constant, Not Redeclarable
-
-### Comments
-
-- Single line Comments: `//`
-
-- Multi-line Comments: `/* ... */`
-
-### Functions
-
-- Standard Function
-
-```js
-// Syntax:
-// function <fn_name>(<args_list>) { <body> }
-
-// Example function that adds two values
-function add(a, b) {
-  return a + b;
-}
-```
-
-- Arrow Functions
-
-```javascript
-
-[const | let | var] <fn_name> = (<args_list>) => { <body> };
-
-// Parentheses around body are optional. When ommited, returns the evaluated value by default
-// The same "add" function above can be written as:
-
-const add = (a, b) => a + b;
-
-// Arrow functions (or lambda expressions) do not have their own scope (this),
-// they borrow it from their parent scope. Useful as anon functions.
-```
-
-- Anonymous Functions
-
-```javascript
-// Functions with no "name"
-// All arrow functions are anonymous
-
-// Example:
-function (a, b) { return (a + b); }
-
-// Since function has no name, it must be assigned to a variable to be called.
-const add = function (a, b) { return (a + b); }
-```
-
-- IIFE (Immediately Invoked Function Expression)
-
-### Promises
-
-### Classes & Objects
-
-## Tips
-
 - Make a dynamic chain of promises
 
   Use
@@ -85,10 +22,7 @@ const add = function (a, b) { return (a + b); }
 
   ```js
   const arr = [d1, d2, d3, ..., dn];
-
-  function fn(d) {
-    return new Promise((res, rej) => { ...; res() });
-  }
+  const fn = async (d) => { /* returns a promise */ };
   ```
 
   into
@@ -100,24 +34,22 @@ const add = function (a, b) { return (a + b); }
   - In newer versions:
 
     ```js
-    for (const d of arr) {
-      await fn(d);
-    }
+    for (const d of arr) await fn(d);
     ```
 
-- Get integer part of a fraction
+- Convert string to num shorthand
 
-  ```js
-  let fraction = 1.234;
-  let intPart = ~~fraction; // 1
+  ```javascript
+  const numStr = "1.23";
+  const numVal = +numStr;
   ```
 
-- Arrays, Iterables and Array-Likes
+- Get integer part of a fraction (like Math.floor)
 
-  - Iterables have a [Symbol.iterator] function; can use used in `for-of` loop
-    - Generator functions can be iterable
-  - Array-likes have numberical indexes and a length key
-    - HTML nodes are array-like
-  - Iterables can be (or not be) array-like and vice versa
-  - Arrays are instance of Array and have Array functions like `pop`, `push` etc
-  - Arrays can be constructed from either of above using `Array.from`
+  ```js
+  const fraction = 1.234;
+  const intPart = ~~fraction; // 1
+  const intPart2 = fraction << 0; // 1
+  ```
+
+  > The `~` operator is 2's complement
