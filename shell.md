@@ -301,23 +301,34 @@
 - Using args
 
 ```bash
+# Usage: argsFn 1 2 3 4 5 6 7 8
 argsfn() {
-    echo "number of args: $#"
-    echo "list of args: $@"
-    echo "name of script: $0"
+  echo "number of args: $#"
+  echo "list of args:"; echo $@
+  echo "string of args: $*"
+  echo "name of script: $0"
 
-    if [ "$#" -ne 3 ]; then
-        echo "usage: $0 arg1 arg2 arg3"
-        exit(1)
-    fi
+  if [ "$#" -lt 3 ]; then
+    echo "usage: $0 arg1 arg2 arg3"
+    exit
+  fi
 
-    echo "first arg: $1"
-    echo "second arg: $2"
-    echo "third arg: $3"
+  echo "first arg: $1"
+  echo "second arg: $2"
+  echo "third arg: $3"
+
+  shift 3
+  echo "rest of the args: $*"
 }
 ```
 
 - Using flags [getopt](https://mywiki.wooledge.org/BashFAQ/035#getopts)
+
+- Get just a filename from whole path
+
+```bash
+basename -s .txt some/path/to/file.txt
+```
 
 ## SSHFS (macos)
 

@@ -40,8 +40,9 @@ func main() {
 		url = ""
 
 		doc, err := goquery.NewDocumentFromReader(res.Body)
-		content := doc.Find("div.chapter-content")
-		outFile.Write([]byte("\n\n\t***\n\n" + content.Text() + "\n\n"))
+		title := doc.Find("div.row.fic-header > h1").Text()
+		content := doc.Find("div.chapter-content").Text()
+		outFile.Write([]byte("\n" + title + "\n\n" + content + "\n"))
 
 		for _, s := range doc.Find("a.btn-primary").EachIter() {
 			content := s.Text()
