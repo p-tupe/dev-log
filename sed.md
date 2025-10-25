@@ -1,6 +1,7 @@
 ---
-modified: Thu Oct 23 18:34:54 EDT 2025
+modified: "Sat Oct 25 11:49:55 EDT 2025"
 ---
+
 ## sed (stream editor)
 
 - Add an extra line for each line break in a file:
@@ -16,3 +17,12 @@ echo "Line 1\nLine 2" | sed "G"
 # Say we wanna add a file.md's last modified time to it's frontmatter
 modified=$(date -r file.md); sed -e "1s/^/---\nmodified: "$modified"\n---\n/g" file.md
 ```
+
+- Notice the `1` in previous command? It represents a line number. So, let update the "modified" time of the file on 2nd line:
+
+```bash
+
+sed "2 s/.*/modified: \"$(date -r file.md)\"/" file.md
+```
+
+    where `2` in the command represents the second line
