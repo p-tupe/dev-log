@@ -1,5 +1,8 @@
+---
+modified: "Sun Oct 26 21:40:43 EDT 2025"
+---
+
 # csplit
-modified: "Sun Oct 26 21:38:59 EDT 2025"
 > split a big file (or stream) into smaller chunks based on pattern
 
 Say we have a file like so:
