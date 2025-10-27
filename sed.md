@@ -1,5 +1,5 @@
 ---
-modified: "Sat Oct 25 11:49:55 EDT 2025"
+modified: "Sat Oct 25 11:51:52 EDT 2025"
 ---
 
 ## sed (stream editor)
@@ -21,7 +21,6 @@ modified=$(date -r file.md); sed -e "1s/^/---\nmodified: "$modified"\n---\n/g" f
 - Notice the `1` in previous command? It represents a line number. So, let update the "modified" time of the file on 2nd line:
 
 ```bash
-
 sed "2 s/.*/modified: \"$(date -r file.md)\"/" file.md
 ```
 
