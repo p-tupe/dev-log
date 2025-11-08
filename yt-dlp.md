@@ -1,20 +1,24 @@
 ---
-modified: Thu Oct 23 12:48:34 EDT 2025
+modified: "Fri Nov  7 22:07:37 EST 2025"
 ---
-## Youtube Download
 
-- Only audio:
+# Youtube Download
 
-  ```sh
-  yt-dlp --ignore-errors --format bestaudio --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' [--yes-playlist] <"URL" | --batch-file  ./fileName>
-  ```
+## Download best audio
 
-  _where fileName is a list of urls separated by blank lines;_
+```sh
+yt-dlp --ignore-errors --format bestaudio \
+--extract-audio --audio-format mp3 \
+--output '%(title)s.%(ext)s' [--yes-playlist] <video-link | --batch-file  ./file.txt>
+```
 
-- Best video+audio:
+where file.txt contains a list of urls separated by blank lines.
 
-  ```sh
-  yt-dlp --ignore-errors --format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4  -o '%(title)s.%(ext)s' <"video-link">
-  ```
+## Download best audio+audio:
 
-  Note the brackets for the above are part of the command.
+```sh
+yt-dlp --verbose --ignore-errors \
+  --format 'bestvideo+bestaudio' \
+  --merge-output-format mp4  \
+  --output '%(title)s.%(ext)s' <video-link>
+```

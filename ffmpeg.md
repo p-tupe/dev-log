@@ -1,23 +1,23 @@
 ---
-modified: "Fri Oct 31 20:18:59 EDT 2025"
+modified: "Fri Nov  7 22:06:03 EST 2025"
 ---
 
-## ffmpeg
+# ffmpeg
 
-- Convert a mov to mp4 (with compression):
+## Convert a mov to mp4 (with compression):
 
 ```sh
-ffmpeg -i video.mov -vcodec h264 -acodec mp2 video.mp4
+ffmpeg -i input.mov output.mp4
 ```
 
-- Trim media from/to
+## Trim media from/to
 
 ```sh
 ffmpeg -ss <start_seconds> -i "input.mp3" -t <end_second> "output.mp3"
 ```
 
-- Compress a video
+## Compress a video
 
 ```bash
-ffmpeg -i input_video.mp4 -c:v libx265 -crf 25 output_video.mp4
+ffmpeg -i input.mp4 -c:v libx265 -crf 25 output.mp4
 ```
