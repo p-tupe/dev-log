@@ -1,32 +1,35 @@
 ---
-modified: Thu Oct 23 15:11:03 EDT 2025
+modified: "Sat Nov  8 19:38:45 EST 2025"
 ---
+
 # (NEO)VIM
 
-- Redirect output of Ex commands to register
+- [Lua API in Neovim](https://neovim.io/doc/user/lua-guide.html#lua-guide)
+
+## Redirect output of Ex commands to register
 
 1. `:redir @a`
 2. `:__commands__`
 3. `:redir END`
 4. `"ap`
 
-- Redirect output of telesope to quickfix `C-q`
+> Redirect output of telesope to quickfix: `C-q`
 
-- Run bash (or any shell) for buffer content
+## Run bash (or any shell) for buffer content
 
-```
+```vim
 :%!bash
 ```
 
-- Convert textfile to pdf (via ps)
+## Convert textfile to pdf (via ps)
 
 ```sh
-$ vim filename.txt -c "hardcopy > filename.ps | q"; pstopdf filename.ps
+vim filename.txt -c "hardcopy > filename.ps | q"; pstopdf filename.ps
 ```
 
 _pstopdf may be names ps2pdf on other OSes_
 
-- Alternative undo redo
+## Alternative undo redo
 
 ```vim
 :earlier __time__
@@ -37,15 +40,15 @@ where **time** = x(s|m|h|d) (s = second, m = minute, h = hour, day)
 
 to go back and forth on state of buffer in time of x units
 
-- Remote editing (using ssh config)
+## Remote editing (using ssh config)
 
 ```vim
-:e scp://staging/~/path/to/file.ext
+:e scp://remote-host/~/path/to/file.ext
 ```
 
-_Assuming a Host for 'staging' is set in ~/.ssh/config_
+_Assuming a Host for 'remote-host' is set in ~/.ssh/config_
 
-- Delete other buffers except current
+## Delete other buffers except current
 
 ```vim
 :% bd | e # | bd #
@@ -59,7 +62,7 @@ where
 
 _spaces are optional_
 
-- Ex mode completion options
+## Ex mode completion options
 
 TAB cycles through options; Ctrl-a inputs all options.
 
@@ -69,24 +72,25 @@ Example: To delete all \*.js files in buffer list
 :bd js Ctrl-a
 ```
 
-_Can use :bwipeout to completely remove a buffer_
+> Can use `:bwipeout` to completely remove a buffer
 
-- Search and Replace (Using neovim telesope)
-  - Search for a term `:Telescope live_grep`
-  - Put all results in quickfix buffer `<C-q>`
-  - Run replace interactive on all results `:cdo s/<sterm>/<rterm>/g[ci] | update`
-  - Capture groups are defined by `\1` `\2` etc and original string by `&`
+## Search and Replace (Using neovim telesope)
 
-- Check diff of files
+- Search for a term `:Telescope live_grep`
+- Put all results in quickfix buffer `<C-q>`
+- Run replace interactive on all results `:cdo s/<sterm>/<rterm>/g[ci] | update`
+- Capture groups are defined by `\1` `\2` etc and original string by `&`
 
-  ```shell
-  $ nvim -d -R file_one file_two
-  ```
+## Check diff of files
 
-  - -d = diff
-  - -R = Readonly
+```sh
+nvim -d -R file_one file_two
+```
 
-- Set filetype in a comment
+- -d = diff
+- -R = Readonly
+
+## Set filetype in a comment
 
 ```bash
 # vi: ft=bash
