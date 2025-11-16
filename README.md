@@ -1,5 +1,3 @@
----
-modified: "Sat Nov 15 18:57:46 EST 2025"
----
+# Pritesh Tupe's Dev Log
 
-# Browse notes at [priteshtupe.com/notes](https://www.priteshtupe.com/notes)
+Browse these online at https://www.priteshtupe.com/notes
