@@ -1,6 +1,7 @@
 ---
-modified: Thu Oct 23 18:36:48 EDT 2025
+modified: "Mon Nov 17 14:56:18 EST 2025"
 ---
+
 # Git
 
 ## Stash
@@ -139,4 +140,15 @@ Git log can be used in conjunction with `touch` command to reset file timestamps
 
 ```bash
 touch -d $(git log -1 --pretty="format:%ad" --date=format:'%Y-%m-%d%H:%M:%S' $file) $file
+```
+
+## Maintenance
+
+> Run tasks to optimize Git repository data, speeding up other Git commands and reducing storage requirements for the repository.
+>
+> ~ [git-scm.com/docs/git-maintenance](https://git-scm.com/docs/git-maintenance)
+
+```bash
+cd my-repository
+git maintenance run
 ```
