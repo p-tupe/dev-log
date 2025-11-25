@@ -1,5 +1,5 @@
 ---
-modified: "Thu Nov 13 20:51:07 EST 2025"
+modified: "Mon Nov 24 13:52:41 EST 2025"
 ---
 
 # Shell (bash | zsh)
@@ -147,6 +147,7 @@ IFS=$'\n\t'
 ```
 
 [http://redsymbol.net/articles/unofficial-bash-strict-mode/](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+
 ## Find command
 
 ```bash
@@ -360,4 +361,10 @@ notify() {
     # notify "Notification Text"
   fi
 }
+```
+
+## Mark an MacOS application as safe (bypass Gatekeeper)
+
+```bash
+xattr -d com.apple.quarantine /path/to/Application.app
 ```

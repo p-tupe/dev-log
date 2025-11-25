@@ -1,6 +1,7 @@
 ---
-modified: Sat Nov 26 13:21:39 EST 2022
+modified: "Mon Nov 24 15:05:24 EST 2025"
 ---
+
 # css
 
 - [MDN Docs](https://developer.mozilla.org/en-US/docs/Learn/CSS)
@@ -115,7 +116,6 @@ modified: Sat Nov 26 13:21:39 EST 2022
 ### Flexbox
 
 - Parent:
-
   - `display: flex`
   - `flex-direction: row (default on web) | column (default on react-native)`
   - `justify-content: center | ...` (main axis)
@@ -123,7 +123,6 @@ modified: Sat Nov 26 13:21:39 EST 2022
   - `flex-wrap: wrap | nowrap`
 
 - Children:
-
   - `flex-grow: <number>` amount of space an item will take
   - `flex-shrink: <number>` same as above
   - `flex-basis: <value>` Initial size
@@ -139,24 +138,24 @@ modified: Sat Nov 26 13:21:39 EST 2022
 - Ant
 - Sementic
 
-### Tips n Tricks
+## Tips n Tricks
 
-- Center Div
+### Center Div
 
-  ```html
-  <div class="outer">This text should be in center!</div>
+```html
+<div class="outer">This text should be in center!</div>
 
-  <style>
-    .outer {
-      display: flex /* grid */;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-  </style>
-  ```
+<style>
+  .outer {
+    display: flex /* grid */;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+</style>
+```
 
-- Change svg color using css filter
+### Change svg color using css filter
 
 [Source](https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element)
 
@@ -176,8 +175,18 @@ filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%
 
    ```css
    .filter-green {
-     filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(
-         118%
-       ) contrast(119%);
+     filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg)
+       brightness(118%) contrast(119%);
    }
    ```
+
+### Center a `position: fixed` element
+
+- [Stackoverflow](https://stackoverflow.com/questions/2005954/center-a-positionfixed-element)
+
+```css
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+```

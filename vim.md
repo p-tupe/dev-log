@@ -1,5 +1,5 @@
 ---
-modified: "Sat Nov  8 19:38:45 EST 2025"
+modified: "Tue Nov 25 14:48:21 EST 2025"
 ---
 
 # (NEO)VIM
@@ -21,6 +21,12 @@ modified: "Sat Nov  8 19:38:45 EST 2025"
 :%!bash
 ```
 
+## Pull info from a shell command into buffer
+
+```vim
+:r!date
+```
+
 ## Convert textfile to pdf (via ps)
 
 ```sh
@@ -36,9 +42,7 @@ _pstopdf may be names ps2pdf on other OSes_
 :later __time__
 ```
 
-where **time** = x(s|m|h|d) (s = second, m = minute, h = hour, day)
-
-to go back and forth on state of buffer in time of x units
+where **time** = x(s|m|h|d) (s = second, m = minute, h = hour, day) to go back and forth on state of buffer in time of x units
 
 ## Remote editing (using ssh config)
 
@@ -93,5 +97,5 @@ nvim -d -R file_one file_two
 ## Set filetype in a comment
 
 ```bash
-# vi: ft=bash
+# vi: ft=markdown
 ```
