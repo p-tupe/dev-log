@@ -1,93 +1,78 @@
 ---
-modified: Thu Oct 23 12:48:34 EDT 2025
+modified: "Fri Nov 28 12:00:52 EST 2025"
 ---
+
 # SSH
 
-- Connect to remote host
+## Setup SSH keys (no password login)
 
-  ```shell
-  $ ssh <username>@<hostname/ip> [-p <port>]
-  ```
+1. Generate keys on client for remote-host
 
-- Setup keys (no password login)
-  - Generate keys on client
+```shell
+ssh-keygen -t ed25519  -f ~/.ssh/remote-host -C "Key for Remote Host"
+```
 
-    ```shell
-    $ ssh-keygen -t ed25519  -f ~/.ssh/<key-name> -C "<Some comment>"
-    ```
+> If you enter a passphrase, make sure to add key to ssh-agent for convenience
 
-    where,  
-     t = type of key algo  
-     f = file name of generated keys  
-     C = comment regarding who and where of key usage
+2. Copy public key to remote server
 
-  - Ensure passphrase is entered, it is remembered later
+```shell
+ssh-copy-id  -i ~/.ssh/remote-host.pub <user>@<host>
+```
 
-  - Copy public key to remote server
+> This is just one of many ways to do it
 
-    ```shell
-    $ ssh-copy-id  -i ~/.ssh/<key-name>.pub <username>@<hostname>
-    ```
+3. That's all! Now `ssh user@remote-host` to login
 
-    where,  
-     i = Identity file to use
+## Tips
 
-  - Turn off password authentication on remote server
+### Secure your server
 
-    ```shell
-    $ sudo sed -i \
-      -e 's/#\?PasswordAuthentication yes/PasswordAuthentication no/' \
-      -e 's/PubkeyAuthentication no/PubkeyAuthentication yes/' \
-      /etc/ssh/sshd_config
-    ```
+Inside `/etc/ssh/sshd_config`, following changes are recommended:
 
-  - May also disable `PermitRootLogin`
+```sshd_config
+PasswordAuthentication no
+PubkeyAuthentication yes
+PermitRootLogin no
+```
 
-  - May change default port
+For extra security, change to a non-standard port for ssh (22 is the standard). If you have a public IPv6 address, use that instead of IPv4. If you can, change the username.
 
-  - Reload ssh daemon via systemctl `sudo systemctl reload sshd`
+All this so scripted attacks (that scour wellknown usernames on standard ip/ports) can be mitigated.
 
-  - May change default ssh porto
+Then reload ssh daemon via systemctl: `sudo systemctl daemon-reload && sudo systemctl restart sshd`
 
-  - Should use tool like fail2ban to reject unauthorized attempts
+May also have something like `fail2ban` running; Ensure your firewall is up and working.
 
-  - To disable login banner/info:
+### Disable login banner/info
 
-    ```shell
-    $ sed -i 's/PrintLastLog yes/PrintLastLog no/' /etc/ssh/sshd_config
-    $ touch /home/$USER/.hushlogin
-    ```
+```shell
+sed -i 's/PrintLastLog yes/PrintLastLog no/' /etc/ssh/sshd_config
+touch /home/<user>/.hushlogin
+```
 
-- Add a known host to ssh config for easier connection (also used by scp & rsync), using ssh config
+### Quicker connection from client
 
-  ```shell
-  $ touch ~/.ssh/config && chmod 600 ~/.ssh/config
-  ```
+Add a known host to ssh config for easier connection (also used by scp & rsync), using ssh config
 
-  ```config
-  Host server-name # server-name is pattern matched
-    HostName <hostname/ip> # indentation optional but recommended
-    User <username>
-    Port <port>
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/<private-key>
-  ```
+```shell
+touch ~/.ssh/config && chmod 600 ~/.ssh/config
+```
 
-  ```shell
-  $ ssh server-name
-  ```
+```config
+Host remote-host
+  HostName <hostname/ip>
+  User <username>
+  Port <port>
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/remote-host
+```
 
-- Recommended - generate a new ssh key pair for every remote host (so even if stolen, cannot compromise others). Can add in config as:
+```shell
+ssh server-name
+```
 
-  ```config
-  Host name1
-    ...
-    Identity ~/.ssh/<key-name>
-
-  Host name2
-    ...
-    Identity ~/.ssh/<key-name>
-  ```
+> It is recommended to generate a new ssh key pair for every remote host.
 
 ## Running local scripts on remote host
 
