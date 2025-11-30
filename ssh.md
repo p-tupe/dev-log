@@ -1,5 +1,5 @@
 ---
-modified: "Fri Nov 28 12:00:52 EST 2025"
+modified: "Fri Nov 28 13:22:15 EST 2025"
 ---
 
 # SSH
@@ -37,6 +37,8 @@ PermitRootLogin no
 ```
 
 For extra security, change to a non-standard port for ssh (22 is the standard). If you have a public IPv6 address, use that instead of IPv4. If you can, change the username.
+
+> If you have an Ubuntu Server on Oracle Cloud, check out [how to add ipv6](https://www.siteandserver.co.uk/add-and-set-up-an-ipv6-address-on-your-oracle-ubuntu-server/)
 
 All this so scripted attacks (that scour wellknown usernames on standard ip/ports) can be mitigated.
 

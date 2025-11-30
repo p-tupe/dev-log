@@ -1,5 +1,5 @@
 ---
-modified: "Tue Oct 28 22:22:12 EDT 2025"
+modified: "Sat Nov 29 19:49:39 EST 2025"
 ---
 
 # Go
@@ -208,6 +208,30 @@ modified: "Tue Oct 28 22:22:12 EDT 2025"
   - `time.Date(...)`
 
 ## How to
+
+### Write a Test
+
+- [go.dev/add-a-test](https://go.dev/doc/tutorial/add-a-test)
+- [gobyexample/testing](https://gobyexample.com/testing)
+
+In short, to test a func `Fn` in package `mx.go`, create a file `mx_test.go` with same package, then add a `TestFn` function that takes in a `*testing.T` like so:
+
+```go
+func TestFn(t *testing.T) {
+    want := "expected"
+    got, err := mx.Fn();
+    if err != nil {
+        t.Fatalf(err) // <- Unexpected error
+    }
+    if want != got {
+        t.Errorf("Expected ", want, ", got", got); // <-- Logical error
+    }
+    // Fatalf stops test run, Errorf shows error but continues other tests
+    // Use each where it makes sense
+}
+```
+
+You can then test this with `go test .` assuming a `go.mod` is in place.
 
 ### Structure a project?
 
