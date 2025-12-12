@@ -1,5 +1,5 @@
 ---
-modified: "Sat Nov 29 19:49:39 EST 2025"
+modified: "Thu Dec 11 19:46:31 EST 2025"
 ---
 
 # Go
@@ -209,6 +209,25 @@ modified: "Sat Nov 29 19:49:39 EST 2025"
 
 ## How to
 
+### Use the regexp package
+
+- [pkg.go.dev/regexp](https://pkg.go.dev/regexp)
+
+```go
+// Quick match
+matched, err := regexp.MatchString(`foo.*`, "seafood")
+fmt.Println(matched, err)
+
+// Find a string
+re := regexp.MustCompile(`foo.?`)
+fmt.Printf("%q\n", re.FindString("seafood fool"))
+
+// Find capture groups
+re := regexp.MustCompile(`a(x*)b`)
+fmt.Printf("%q\n", re.FindAllStringSubmatch("-ab-", -1))
+fmt.Printf("%q\n", re.FindAllStringSubmatch("-axxb-", -1))
+```
+
 ### Write a Test
 
 - [go.dev/add-a-test](https://go.dev/doc/tutorial/add-a-test)
@@ -232,6 +251,49 @@ func TestFn(t *testing.T) {
 ```
 
 You can then test this with `go test .` assuming a `go.mod` is in place.
+
+### Compile time assertion for a struct implementing an interface
+
+TL;DR: To ensure that a type `T` satisfies interface `I`, add this one-liner:
+
+```go
+var _ I = (*T)(nil)
+```
+
+Long story -
+
+Okay, this was a bit of a head-scratcher for me, so I'll explain it from the top as I understood it:
+
+Premise: Go is "duck-typed" (like Python), in the sense you don't explicitly tell a type to implement an interface (like say, Java). Rather you write the methods as required by the interface and the type satisfies that interface implicitly.
+
+```go
+// Say we have an interface Xer like so defined somewhere
+type Xer interface  { X() }
+
+// And a function TakesXer that relies on the above
+func TakesXer(x Xer) {}
+
+// In some other file, we have type A that is a struct
+type A struct {}
+
+// And we want to pass an instance of it to TakesXer
+func unrelatedCall() { a := A{}; TakesXer(a) }
+
+// All it takes is for A to implement X, so it
+func (a A) X() {}
+```
+
+Problem: This is all fine and dandy when the interface definition, consumer function and the struct itself are well-known to you (like in a small code-base). You can eyeball it to ensure everything is on the up and up. When you can't, how do you ensure and let others - humans and machines both, know as well, that yes, `A` actually satisfies `Xer` and you can use it in functions that consume it?
+
+Solution: That is where this magical line comes into play -
+
+```go
+var _ Xer = (*A)(nil)
+```
+
+Alright, let's break it down. Remember basic variable definition? `var <name> <type> = <value>` . Well, we don't actually need a `name` because we ain't gonna use it. So `_` it. `type` is the interface we're ensuring is satisfied by `value`. But we don't want to initialize a `value` either, so we make a `nil` pointer to it.
+
+And thus, if `A` does not implement `Xer` by way of `X()` method, we will get an error. More importantly, any packages (and linters, lsps, etc) that use A now know that it implements `Xer` and with this one line!
 
 ### Structure a project?
 
