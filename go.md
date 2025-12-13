@@ -1,5 +1,5 @@
 ---
-modified: "Thu Dec 11 20:23:34 EST 2025"
+modified: "Sat Dec 13 11:19:29 EST 2025"
 ---
 
 # Go
@@ -68,6 +68,11 @@ fmt.Printf("%q\n", re.FindString("seafood fool"))
 re := regexp.MustCompile(`a(x*)b`)
 fmt.Printf("%q\n", re.FindAllStringSubmatch("-ab-", -1))
 fmt.Printf("%q\n", re.FindAllStringSubmatch("-axxb-", -1))
+
+// Replace A with X, B with Y, C with Z
+replaceMap := map[string]string{"A": "X", "B": "Y", "C": "Z"}
+re := regexp.MustCompile(`(A|C|G|T)`)
+re.ReplaceAllStringFunc("ABCCCBBAAABC", func(s string) string { return replaceMap[s] })
 ```
 
 ### Write a Test
@@ -137,6 +142,22 @@ var _ Xer = (*A)(nil)
 Alright, let's break it down. Remember basic variable definition? `var <name> <type> = <value>` . Well, we don't actually need a `name` because we ain't gonna use it. So `_` it. `type` is the interface we're ensuring is satisfied by `value`. But we don't want to initialize a `value` either, so we make a `nil` pointer to it.
 
 And thus, if `A` does not implement `Xer` by way of `X()` method, we will get an error. More importantly, any packages (and linters, lsps, etc) that use `A` now know that it implements `Xer`!
+
+### Use `go run` as a shell script
+
+> [stackoverflow.com/whats-the-appropriate-go-shebang-line](https://stackoverflow.com/questions/7707178/whats-the-appropriate-go-shebang-line)
+
+Add this at the top of file (even before `package main`):
+
+```bash
+//usr/bin/env go run "$0" "$@"; exit "$?"
+```
+
+`chmod` and then your `./script.go` just works!
+
+> <span style="color:orange">IMPORTANT!</span> go will complain if you have multiple files with `main` func
+
+### Ignore multiple `main` functions in same package
 
 ### Structure a project?
 
