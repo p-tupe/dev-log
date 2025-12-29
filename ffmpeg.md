@@ -1,10 +1,10 @@
 ---
-modified: "Fri Nov  7 22:06:03 EST 2025"
+modified: "Fri Dec 19 14:06:37 EST 2025"
 ---
 
 # ffmpeg
 
-## Convert a mov to mp4 (with compression):
+## Convert a mov to mp4
 
 ```sh
 ffmpeg -i input.mov output.mp4

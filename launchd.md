@@ -1,6 +1,7 @@
 ---
-modified: Fri Nov 18 08:44:47 EST 2022
+modified: "Mon Dec 29 17:29:14 EST 2025"
 ---
+
 # launchd
 
 > Linux systemd == Macos launchd
@@ -62,10 +63,18 @@ modified: Fri Nov 18 08:44:47 EST 2022
 
 1. Verify `plutil ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
-1. Load agent `launchctl load -w ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
+1. Load agent `launchctl enable ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
-1. Unload agent `launchctl unload -w ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
+1. Unload agent `launchctl disable ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
 1. Start/Stop (for debugging) `launchctl start com.zettelmerken.dailyreview`
 
 1. List all services `launchctl list`
+
+## Error: Unrecognized target specifier.
+
+- Add a target specifier
+
+```bash
+launchctl enable user/$(id -u)/com.abc.xyz.plist
+```

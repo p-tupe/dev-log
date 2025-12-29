@@ -1,6 +1,7 @@
 ---
-modified: Mon Jul 18 18:32:52 EDT 2022
+modified: "Mon Dec 29 16:38:18 EST 2025"
 ---
+
 # Python
 
 ## Links
@@ -31,15 +32,8 @@ modified: Mon Jul 18 18:32:52 EDT 2022
 
 - [Python Language Reference](https://docs.python.org/3/reference/index.html)
 
-### Installing packages in a Virtual Environment
+### Using `uv` to install stuff globally
 
-- [Source](https://snarky.ca/a-quick-and-dirty-guide-on-how-to-install-packages-for-python/)
-
-  ```python
-  python -m venv --prompt . .venv
-  echo "*" > .venv/.gitignore
-  source .venv/bin/activate
-  python -m pip install --upgrade pip
-  ```
-
-  To deactivate: `source .venv/bin/deactivate`
+```shell
+uv tool install <package>
+```
