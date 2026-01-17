@@ -1,5 +1,5 @@
 ---
-modified: "Tue Oct 28 22:43:32 EDT 2025"
+modified: "Tue Dec 30 13:42:07 EST 2025"
 ---
 
 # Docker
@@ -18,36 +18,37 @@ modified: "Tue Oct 28 22:43:32 EDT 2025"
 
 - Deploy a container
 
-  ```sh
-  docker run <image-name> [<command>]
-  ```
+```sh
+docker run <image-name> [<command>]
+```
 
-  with following options:
-  - -d = detached mode
-  - -e = environment variables
-  - -p <host port>:<container port> = port redirect
-  - -v <host dir> | <volumne name>:<container dir> = bound volume | named volume
-  - -i = interactive mode (keeps STDIN open)
-  - -t = pseudo-tty
-  - -name = assign a name to the container
-  - -w = work directory inside container
-  - -rm = automatically remove on exit
+with following options:
+
+    - -d = detached mode
+    - -e = environment variables
+    - -p <host port>:<container port> = port redirect
+    - -v <host dir> | <volumne name>:<container dir> = bound volume | named volume
+    - -i = interactive mode (keeps STDIN open)
+    - -t = pseudo-tty
+    - -name = assign a name to the container
+    - -w = work directory inside container
+    - -rm = automatically remove on exit
 
 - When mounting volumes "${PWD}" works, "${pwd}" doesn't. Keep env var case sensitivity in mind.
 
 - Show deployed containers
 
-  ```sh
-  docker ps [-a for all]
-  ```
+```sh
+docker ps [-a for all]
+```
 
 - Execute a command in deployed container
 
-  ```sh
-  docker exec [-it for interactive tty] <container-id> <app | shell> <command>
-  ```
+```sh
+docker exec [-it for interactive tty] <container-id> <app | shell> <command>
+```
 
-- To Change default logger and data-root directory, add following to /etc/docker/daemon.json
+- To change default logger and data-root directory, add following to /etc/docker/daemon.json
 
   ```json
   {
@@ -61,7 +62,13 @@ modified: "Tue Oct 28 22:43:32 EDT 2025"
   ```
 
   - Note that local log driver does not show logs with docker compose
-  - Other notable options instead of local: journald, syslog,
+  - Other notable options instead of local: journald, syslog
+
+- To remove all unnecessary stuff:
+
+```bash
+docker system prune --all --volumes
+```
 
 ### Troubleshoot
 
