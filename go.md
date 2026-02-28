@@ -1,5 +1,5 @@
 ---
-modified: "Sat Jan 17 15:09:40 EST 2026"
+modified: "Sat Feb 28 15:42:04 EST 2026"
 ---
 
 # Go
@@ -45,6 +45,12 @@ modified: "Sat Jan 17 15:09:40 EST 2026"
 ### Read from console/terminal
 
 ```go
+// Word scanner version
+var c string
+fmt.Print("Continue? [y/n]: ")
+fmt.Scan(&c)
+
+// Line scanner version
 ip := bufio.NewReader(os.Stdin)
 fmt.Print("Enter something: ")
 name, _ := ip.ReadString('\n')
@@ -248,3 +254,32 @@ if err := cmd.Run(); err != nil {
 ### Use go:stringer, and when?
 
 ### Use go:embed, and when?
+
+### Slices gotchas
+
+- Ranging on a slices creates a _copy_ of each item; so modifying a slices goes like so:
+
+```go
+for idx, item := range allItems {
+    // This won't work, will only modify a locally copied item
+    item.key = value
+
+    // Use this instead to modify the slice
+    allItems[i].key = value
+}
+```
+
+- Variadic args do no pass a copy, don't modify assuming a clone
+
+```go
+func x() {
+    og := []int{1, 2, 3}
+    y(og...)
+    fmt.Println(og) // 1, 2, 9
+}
+
+func y(arr ...int) {
+    arr[2] = 9 // arr points to same underlying memory as og
+    fmt.Println(arr)
+}
+```

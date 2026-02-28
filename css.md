@@ -1,5 +1,5 @@
 ---
-modified: "Mon Nov 24 15:05:24 EST 2025"
+modified: "Tue Feb 17 09:39:43 EST 2026"
 ---
 
 # css
@@ -7,6 +7,8 @@ modified: "Mon Nov 24 15:05:24 EST 2025"
 - [MDN Docs](https://developer.mozilla.org/en-US/docs/Learn/CSS)
 
 - [freeCodeCamp youtube link](https://www.youtube.com/watch?v=a_iQb1lnAEQ)
+
+- [modern-css](https://modern-css.com/)
 
 ## Selectors
 
@@ -142,17 +144,19 @@ modified: "Mon Nov 24 15:05:24 EST 2025"
 
 ### Center Div
 
-```html
-<div class="outer">This text should be in center!</div>
+```css
+.ele {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
-<style>
-  .outer {
-    display: flex /* grid */;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-</style>
+/* OR */
+.ele {
+  display: grid;
+  place-items: center;
+}
 ```
 
 ### Change svg color using css filter
@@ -189,4 +193,13 @@ position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+```
+
+### Get the glass-textured transparent background
+
+```css
+.glass {
+  backdrop-filter: blur(12px) saturate(1.5);
+  background: rgba(255, 255, 255, 0.1);
+}
 ```
