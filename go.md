@@ -1,5 +1,5 @@
 ---
-modified: "Sat Feb 28 15:42:04 EST 2026"
+modified: "Fri Mar  6 16:25:57 EST 2026"
 ---
 
 # Go
@@ -282,4 +282,47 @@ func y(arr ...int) {
     arr[2] = 9 // arr points to same underlying memory as og
     fmt.Println(arr)
 }
+```
+
+### How to accept an array of options in go flag?
+
+```go
+// This is a simpler way with no parsing
+flag.Parse()
+inputs := flag.Args() // inputs contains all options
+```
+
+- [Source](https://beta.stackoverflow.com/questions/28322997/how-to-get-a-list-of-values-into-a-flag-in-golang)
+
+```go
+// This is a more involved one
+package main
+
+import "flag"
+
+type arrayFlags []string
+
+// String is an implementation of the flag.Value interface
+func (i *arrayFlags) String() string {
+    return fmt.Sprintf("%v", *i)
+}
+
+// Set is an implementation of the flag.Value interface
+func (i *arrayFlags) Set(value string) error {
+    *i = append(*i, value)
+    return nil
+}
+
+func main() {
+    var myFlags arrayFlags
+    flag.Var(&myFlags, "list1", "Some description for this param.")
+    flag.Parse()
+}
+```
+
+### How to run a fn every X seconds?
+
+```go
+ticker := time.Tick(3 * time.Second)
+for range ticker { /*...*/ }
 ```
