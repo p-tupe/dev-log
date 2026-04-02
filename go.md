@@ -1,5 +1,5 @@
 ---
-modified: "Wed Mar 18 12:39:46 EDT 2026"
+modified: "Fri Mar 20 10:28:36 EDT 2026"
 ---
 
 # Go
@@ -165,6 +165,12 @@ Alright, let's break it down. Remember basic variable definition? `var <name> <t
 
 And thus, if `A` does not implement `Xer` by way of `X()` method, we will get an error. More importantly, any packages (and linters, lsps, etc) that use `A` now know that it implements `Xer`!
 
+```go
+// Let's say we want B to implement X, but forgot to do so
+type B struct{}
+var _ Xer = (*B)(nil) // <-- this line will now error out!
+```
+
 ### Use `go run` as a shell script
 
 > [stackoverflow.com/whats-the-appropriate-go-shebang-line](https://stackoverflow.com/questions/7707178/whats-the-appropriate-go-shebang-line)
@@ -208,7 +214,7 @@ import "whatever/project-name/internal/utils"
 utils.X()
 ```
 
-If it's an CLI/API, by convention that code goes into a `cmd` dir, while for a website, it goes into a `web` dir (sibling to `internal`).
+If it's an CLI/API, by convention that code goes into a `cmd/cli` dir, while for a website, it goes into a `cmd/web` dir (sibling to `internal`).
 
 ### Gracefully shut down a go app
 
@@ -232,18 +238,13 @@ func main() {
 }
 ```
 
-### Use a template (in html web-server)
-
-> See [dev-log/go]() and [pingmon/web]() for reference. See [go.dev/text/template](https://pkg.go.dev/text/template) and [go.dev/html/template](https://pkg.go.dev/html/template) for documentation.
-
 ### How to run an external command?
 
 > See [go.dev/os/exec](https://pkg.go.dev/os/exec) for package docs
 
 ```go
 // For normal run, but show error if not:
-cmd := exec.Command("echo", "hello, world!")
-if err := cmd.Run(); err != nil {
+if err := exec.Command("echo", "hello, world!").Run(); err != nil {
     log.Println(err)
 }
 
@@ -324,7 +325,7 @@ for idx, item := range allItems {
 }
 ```
 
-- Variadic args do no pass a copy, don't modify assuming a clone
+- Variadic args do not pass a copy, don't modify assuming a clone
 
 ```go
 func x() {
@@ -339,7 +340,7 @@ func y(arr ...int) {
 }
 ```
 
-- Slices delete function _zeroes elements_ in memory and _returns_ a modified slice.
+- Slices delete function _zeroes elements_ in place and _returns_ a modified slice.
 
 ```go
 sliceA := []int{2, 4, 3, 1, 6}

@@ -1,5 +1,5 @@
 ---
-modified: "Mon Nov 24 13:52:41 EST 2025"
+modified: "Wed Mar 18 22:10:53 EDT 2026"
 ---
 
 # Shell (bash | zsh)
@@ -177,6 +177,14 @@ if order is not important
 ```bash
 sort -u file > newfile # u = unique
 ```
+
+## Sort files naturally
+
+```bash
+ls | sort -V
+```
+
+`V` stands for version sort, so file **xyz-20** is sorted _before_ **xyz-19**
 
 ## Start a background job
 

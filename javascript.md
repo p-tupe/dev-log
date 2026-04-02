@@ -1,6 +1,7 @@
 ---
-modified: Thu Oct 23 12:48:34 EDT 2025
+modified: "Thu Apr  2 13:24:59 EDT 2026"
 ---
+
 # Javascript
 
 - [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/javascript)
@@ -11,48 +12,47 @@ modified: Thu Oct 23 12:48:34 EDT 2025
 
 - [Microsoft Developer Javascript Resources](https://developer.microsoft.com/en-us/javascript/)
 
-## Notes
+## How To
 
-- Make a dynamic chain of promises
+### Make a dynamic chain of promises
 
-  Use
+```js
+// To convert
+const arr = [d1, d2, d3, ..., dn];
+const fn = async (d) => { /* returns a promise */ };
+// into
+Promise.resolve().then(() => fn(d1)).then(() => fn(d2)).then(() => fn(d3))...then(() => fn(dn)).catch(error)
+// use
+arr.reduce((c, d) => c.then(() => fn(d)), Promise.resolve()).catch(error);
+// OR
+for (const d of arr) await fn(d);
+```
 
-  ```js
-  arr.reduce((c, d) => c.then(() => fn(d)), Promise.resolve()).catch(error);
-  ```
+### Convert string to num shorthand
 
-  to convert
+```javascript
+const numStr = "1.23";
+const numVal = +numStr; // 1.23
+```
 
-  ```js
-  const arr = [d1, d2, d3, ..., dn];
-  const fn = async (d) => { /* returns a promise */ };
-  ```
+### Get integer part of a fraction (like Math.floor)
 
-  into
+```js
+const fraction = 1.234;
+const intPart = ~~fraction; // 1
+const intPart2 = fraction << 0; // 1
+```
 
-  ```js
-  Promise.resolve().then(() => fn(d1)).then(() => fn(d2)).then(() => fn(d3))...then(() => fn(dn)).catch(error)
-  ```
+> The `~` operator is 2's complement
 
-  - In newer versions:
+### Get an input from stdin
 
-    ```js
-    for (const d of arr) await fn(d);
-    ```
+```javascript
+import * as readline from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
 
-- Convert string to num shorthand
-
-  ```javascript
-  const numStr = "1.23";
-  const numVal = +numStr;
-  ```
-
-- Get integer part of a fraction (like Math.floor)
-
-  ```js
-  const fraction = 1.234;
-  const intPart = ~~fraction; // 1
-  const intPart2 = fraction << 0; // 1
-  ```
-
-  > The `~` operator is 2's complement
+const rl = readline.createInterface({ input, output });
+const answer = await rl.question("What do you think of Node.js? ");
+console.log(`Thank you for your valuable feedback: ${answer}`);
+rl.close();
+```
