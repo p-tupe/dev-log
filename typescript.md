@@ -1,6 +1,7 @@
 ---
-modified: Wed Sep  3 19:56:25 EDT 2025
+modified: "Fri Apr 24 19:23:02 EDT 2026"
 ---
+
 # Typescript
 
 > JavaScript with types
@@ -18,7 +19,6 @@ modified: Wed Sep  3 19:56:25 EDT 2025
 - Good to have `noImplicitAny` and `strictNullChecks` on.
 
 - Always prefer using `interface` over `type` unless explicitly needed.
-
   - The former is extendable and mergable
   - It shows up by name in error messages.
   - `type` can alias existing types (or interfaces): `type Username = string | IUsername`.
@@ -72,3 +72,9 @@ function whichColor(c: Color): string {
 Which leads to:
 
 <span style="color: red; font-family: monospace">Type 'Color.Green' does not satisfy the expected type 'never'.</span>
+
+### How to import json in modern syntax
+
+```typescript
+import cfg from "./some-config.json" with { type: "json" };
+```

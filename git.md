@@ -1,5 +1,5 @@
 ---
-modified: "Mon Nov 17 14:56:18 EST 2025"
+modified: "Fri Apr 17 14:48:08 EDT 2026"
 ---
 
 # Git
@@ -151,4 +151,35 @@ touch -d $(git log -1 --pretty="format:%ad" --date=format:'%Y-%m-%d%H:%M:%S' $fi
 ```bash
 cd my-repository
 git maintenance run
+```
+
+## Multi-account setup
+
+> [docs.github.com](https://docs.github.com/en/account-and-profile/how-tos/account-management/managing-multiple-accounts)
+
+```bash
+# Generate ssh key for <other> account
+ssh-keygen -t ed25519  -f ~/.ssh/other-account -C "Key for other-account"
+
+# Copy the publick key
+cat ~/.ssh/other-account.pub
+
+# Add it to your Github <other> account as Authentication Key on
+# https://github.com/settings/ssh/new
+
+# Update your ssh_config as follows:
+cat <<EOF >> ~/.ssh/config
+
+Host github-other.com
+  IdentityFile ~/.ssh/other-account
+  Hostname github.com
+  User git
+  IdentitiesOnly yes
+EOF
+
+# Test if it works
+ssh -T git@github-other.com
+
+# Ensure your other-account repos are configured by the other-account email
+git config user.email "other@account.com"
 ```

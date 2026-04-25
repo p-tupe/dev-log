@@ -1,5 +1,5 @@
 ---
-modified: "Thu Apr  2 13:24:59 EDT 2026"
+modified: "Tue Apr  7 17:42:01 EDT 2026"
 ---
 
 # Javascript
@@ -11,6 +11,8 @@ modified: "Thu Apr  2 13:24:59 EDT 2026"
 - [A good breakdown of function terminology](https://dev.to/aaron_powell/named-function-vs-variable-function-11m0)
 
 - [Microsoft Developer Javascript Resources](https://developer.microsoft.com/en-us/javascript/)
+
+- [javascript.info](https://javascript.info/intro)
 
 ## How To
 
