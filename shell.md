@@ -1,5 +1,5 @@
 ---
-modified: "Wed Mar 18 22:10:53 EDT 2026"
+modified: "Mon Apr 27 15:28:09 EDT 2026"
 ---
 
 # Shell (bash | zsh)
@@ -339,6 +339,8 @@ argsfn() {
 ```
 
 ## Using flags [getopt](https://mywiki.wooledge.org/BashFAQ/035#getopts)
+
+## Shell script take input from file or stdin
 
 ## Get just a filename from whole path
 

@@ -1,5 +1,5 @@
 ---
-modified: "Mon Dec 29 17:29:14 EST 2025"
+modified: "Thu May  7 10:46:56 EDT 2026"
 ---
 
 # launchd
@@ -50,6 +50,12 @@ modified: "Mon Dec 29 17:29:14 EST 2025"
        <key>Minute</key>
        <integer>10</integer>
      </dict>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TOTO</key>
+        <string>test</string>
+    </dict>
 
      <!-- For Debugging
      <key>StandardErrorPath</key>

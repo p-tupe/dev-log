@@ -1,5 +1,5 @@
 ---
-modified: "Sat Apr 25 13:32:07 EDT 2026"
+modified: "Sat May  9 09:13:44 EDT 2026"
 ---
 
 # Parallel Log Cruncher — Language-Agnostic Learning Spec
@@ -25,7 +25,7 @@ timestamp level ip path method status duration
 - `path` — starts with `/`
 - `method` — one of GET, POST, PUT, DELETE, PATCH
 - `status` — integer 100-599
-- `duration` — ends with `ms`, parse to integer
+- `duration` — ends with `ms`
 
 Skip any line that doesn't match. Print a warning to stderr for each skipped line. Keep count of valid vs skipped.
 
@@ -243,7 +243,7 @@ All resources are about concepts, not language APIs. If you need the API docs fo
 
 ```bash
 i=0; s=42; l=(INFO WARN ERROR DEBUG); m=(GET POST PUT DELETE PATCH); p=(/api/users /api/checkout /api/login /api/products /api/search /api/orders /api/reviews)
-RANDOM=$s; while ((i++ < ${1:-1000})); do
+RANDOM=$s; while ((i++ < ${1:-100000})); do
   t=$(date -u -d "2026-04-23T00:00:00+00:00 + $i seconds" +%FT%TZ 2>/dev/null || date -u -j -v+${i}S -f "%Y-%m-%dT%H:%M:%S%z" "2026-04-23T00:00:00+0000" +%FT%TZ 2>/dev/null || printf "2026-04-23T%02d:%02d:%02dZ" $((i/3600)) $(((i%3600)/60)) $((i%60)))
   st=200; ((RANDOM > 28000)) && st=$((400+RANDOM%100))
   echo "$t ${l[$RANDOM%4]} $((RANDOM%256)).$((RANDOM%256)).$((RANDOM%256)).$((RANDOM%256)) ${p[$RANDOM%7]} ${m[$RANDOM%5]} $st $((RANDOM%500+1))ms"
