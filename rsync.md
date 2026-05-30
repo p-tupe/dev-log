@@ -37,3 +37,9 @@ It can copy locally, to/from another host over any remote shell, or to/from a re
   - -P = --partial + --progress
 
 > Note the trailing slash; without that it will put folder1 inside folder2
+
+## Respect gitignore
+
+```bash
+rsync --filter=":- .gitignore" ...
+```

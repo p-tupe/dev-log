@@ -11,6 +11,14 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 - https://blessed.rs/crates | https://lib.rs/ <- Popular crates
 - https://rust-lang-nursery.github.io/rust-cookbook/ <- How to use 'em
 - https://github.com/rust-unofficial/awesome-rust <- Stuff made in rust
+- https://github.com/pretzelhammer/rust-blog <- Good stuff
+
+## Must Know Crates
+
+- tokio
+- anyhow
+- clap
+- serde (and friends)
 
 ## How to
 
