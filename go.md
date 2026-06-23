@@ -84,6 +84,7 @@ re.ReplaceAllStringFunc("ABCCCBBAAABC", func(s string) string { return replaceMa
 ### Write a Test
 
 > [go.dev/add-a-test](https://go.dev/doc/tutorial/add-a-test)
+
 > [gobyexample/testing](https://gobyexample.com/testing)
 
 In short, to test a func `Fn` in package `mx.go`, create a file `mx_test.go` with same package, then add a `TestFn` function that takes in a `*testing.T` like so:
@@ -196,7 +197,7 @@ For all projects, start with:
 ```bash
 mkdir project-name && cd project-name
 go mod init whatever/project-name
-touch project-name.go # package main
+touch project-name.go # package main for apps
 ```
 
 If it's a short script, this is enough. If you need to split code, say separate some utilities:

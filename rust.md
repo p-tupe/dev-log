@@ -15,12 +15,23 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 
 ## Must Know Crates
 
-- tokio
-- anyhow
-- clap
-- serde (and friends)
+- tokio <- async runtime
+- clap <- cli arg parsing
+- serde (and friends) <- struct to json/toml/etc
+- tracing (+ tracing-subscriber) <- logging
+- time <- datetime stuff
+- axum <- web server
+- regex <- regular expressions
+- rand <- random numbers
+- anyhow <- error handling
 
 ## How to
+
+### Quickly convert a digit (0-9) into char
+
+```rust
+(digit + b'0') as char
+```
 
 ### Read a file line by line
 
@@ -169,3 +180,7 @@ Try uncommenting the function calls and compiling to see what errors pop up.
 And that's it! The State-Type Pattern. It is possible to implement this in other languages as well, but since they don't naturally consume their variables like here, it can get a bit unergonomic and less safe.
 
 Finally, taking this too far in the name of safety means losing a lot on flexibility. In real-world apps, for instance, one might want a Post to be automatically approved if written by an internal team (and skip the "review" phase). It would be trivial to add a conditional in Go's implementation whereas you might have to rethink the whole implementation in our current design.
+
+### Actor Pattern
+
+- [priteshtupe.com/posts/rust-actors/](https://priteshtupe.com/posts/rust-actors/)
