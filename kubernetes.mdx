@@ -1,0 +1,47 @@
+import PodsImg from "./meta/pods-clean.svg"
+import AppsImg from "./meta/apps-clean.svg"
+import NodesImg from "./meta/nodes-clean.svg"
+import ControlsImg from "./meta/control-plane-clean.svg"
+import ClustersImg from "./meta/clusters-clean.svg"
+
+# Kubernetes
+
+- [Documentation](https://kubernetes.io/docs/home/)
+
+## Notes
+
+> Your containers manage your apps. K8s manages your containers.
+
+And your storage, keys, logs, resources, DNS, etc. Consider is a generic platform for managing "deployments" of containers and integrations for stuff surrounding it.
+
+### Terminology
+
+- A `Pod` can be thought of as a running container.
+
+<div style="max-width: 90%; text-align: center; color: var(--emphasis-color)">
+  <PodsImg />
+</div>
+
+- You application may consist of many pods.
+
+<div style="max-width: 90%; text-align: center; color: var(--emphasis-color)">
+  <AppsImg />
+</div>
+
+- A `Node` is analogous to a "machine" or "server" (physical/virtual) that would normally host your apps. A node has many pods.
+
+<div style="max-width: 90%; text-align: center; color: var(--emphasis-color)">
+  <NodesImg />
+</div>
+
+- A `Control Plane` is a node that controls the other "worker" nodes, and is a core part of every k8s deploy.
+
+<div style="max-width: 90%; text-align: center; color: var(--emphasis-color)">
+  <ControlsImg />
+</div>
+
+- A `Cluster` is a collection of nodes and the control plane.
+
+<div style="max-width: 90%; text-align: center; color: var(--emphasis-color)">
+  <ClustersImg />
+</div>
