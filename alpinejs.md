@@ -1,6 +1,7 @@
 ---
-modified: Tue May 24 13:57:49 EDT 2022
+modified: Thu Oct 23 18:39:42 2025 -0400
 ---
+
 # alpinejs
 
 - [Official Site](https://alpinejs.dev)
