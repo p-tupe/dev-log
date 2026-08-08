@@ -39,6 +39,15 @@ Data Structures:
 - structs: like elixir's `{:keyword "value"}` pairs (or js objects, or clisp plists)
 - tables: mutable `@`structs
 
+| data type          | immutable                             | mutable  |
+| ------------------ | ------------------------------------- | -------- |
+| atom               | number, keyword, symbol, nil, boolean |          |
+| closure            |                                       | function |
+| coroutine          |                                       | fiber    |
+| byte array         | string                                | buffer   |
+| random-access list | tuple                                 | array    |
+| hash table         | struct                                | table    |
+
 Bindings:
 
 > anything with paren tuple `(...)` is "called" (conventionally called "forms")

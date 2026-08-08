@@ -53,6 +53,8 @@ sed -i 's/PrintLastLog yes/PrintLastLog no/' /etc/ssh/sshd_config
 touch /home/<user>/.hushlogin
 ```
 
+> https://github.com/skeeto/endlessh
+
 ### Quicker connection from client
 
 Add a known host to ssh config for easier connection (also used by scp & rsync), using ssh config

@@ -14,6 +14,8 @@ modified: "Tue Apr  7 17:42:01 EDT 2026"
 
 - [javascript.info](https://javascript.info/intro)
 
+- https://eloquentjavascript.net/
+
 ## How To
 
 ### Make a dynamic chain of promises

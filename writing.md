@@ -18,3 +18,5 @@ http://www.jacklynch.net/Writing/index.html
 - Dynomight
 
 https://dynomight.net/2021/02/07/writing-as-a-craft/
+
+- How to write English prose https://thelampmagazine.com/blog/how-to-write-english-prose
