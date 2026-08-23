@@ -18,69 +18,67 @@ modified: "Thu May  7 10:46:56 EDT 2026"
 
 1. Add the following xml to it:
 
-   ```xml
-   <?xml version="1.0" encoding="utf-8"?>
-   <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
-   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-   <plist version="1.0">
-   <dict>
-
-     <key>Label</key>
-     <string>com.zettelmerken.dailyreview</string>
-
-     <key>ServiceDescription</key>
-     <string>Zettelmerken Daily Review</string>
-
-     <key>ProgramArguments</key>
-     <array>
-       <string>/opt/homebrew/bin/python3</string>
-       <string>-m</string>
-       <string>zettelmerken</string>
-     </array>
-
-     <!-- Run on load (at bootup) -->
-     <key>RunAtLoad</key>
-     <true />
-
-     <!-- Run Daily at 00:10 min -->
-     <key>StartCalendarInterval</key>
-     <dict>
-       <key>Hour</key>
-       <integer>0</integer>
-       <key>Minute</key>
-       <integer>10</integer>
-     </dict>
-
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.zettelmerken.dailyreview</string>
+    <key>ServiceDescription</key>
+    <string>Zettelmerken Daily Review</string>
+    <!-- Optional, if it's a direct script or binary -->
+    <key>Program</key>
+    <string>/Users/pritesh/.local/bin/zettelmerkenh</string>
+    <key>ProgramArguments</key>
+    <array>
+      <!-- First option is always the script/binary path -->
+      <string>/opt/homebrew/bin/python3</string>
+      <string>-m</string>
+      <string>zettelmerken</string>
+    </array>
+    <!-- Run on load (at bootup) -->
+    <key>RunAtLoad</key>
+    <true />
+    <!-- Run Daily at 00:10 min -->
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>0</integer>
+      <key>Minute</key>
+      <integer>10</integer>
+    </dict>
     <key>EnvironmentVariables</key>
     <dict>
-        <key>TOTO</key>
-        <string>test</string>
+      <key>TOTO</key>
+      <string>test</string>
     </dict>
+    <!-- For Debugging
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.zettelmerken.dailyreview.err</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/com.zettelmerken.dailyreview.out</string>
+    -->
+  </dict>
+</plist>
+```
 
-     <!-- For Debugging
-     <key>StandardErrorPath</key>
-     <string>/tmp/com.zettelmerken.dailyreview.err</string>
-     <key>StandardOutPath</key>
-     <string>/tmp/com.zettelmerken.dailyreview.out</string>
-     -->
-   </dict>
-   </plist>
-   ```
+1. Verify `plutil -lint ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
-1. Verify `plutil ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
+1. Register agent `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
-1. Load agent `launchctl enable ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
+1. Unregister agent `launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
 
-1. Unload agent `launchctl disable ~/Library/LaunchAgents/com.zettelmerken.dailyreview.plist`
+1. Start/Stop (for debugging) `launchctl enable/disable gui/$(id -u) ~/Library/LaunchAgents/com.zettelmerken.dailyreview`
 
-1. Start/Stop (for debugging) `launchctl start com.zettelmerken.dailyreview`
+1. List service `launchctl list | grep com.zettelmerken`
 
-1. List all services `launchctl list`
+> Do not use load/unload start/stop, those are deprecated
 
 ## Error: Unrecognized target specifier.
 
 - Add a target specifier
 
 ```bash
-launchctl enable user/$(id -u)/com.abc.xyz.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.abc.xyz.plist
 ```

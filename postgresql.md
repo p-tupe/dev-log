@@ -1,6 +1,7 @@
 ---
 modified: Thu Oct 20 15:32:23 EDT 2022
 ---
+
 # Postgresql
 
 - [Official site](https://www.postgresql.org)
@@ -10,6 +11,9 @@ modified: Thu Oct 20 15:32:23 EDT 2022
 - [Tutorial](https://www.postgresqltutorial.com/)
 
 - [Quick Reference](https://zaiste.net/posts/postgresql-primer-for-busy-people/)
+
+- https://challahscript.com/what_i_wish_someone_told_me_about_postgres
+- https://www.raphaelbauer.com/posts/postgresql-everything/
 
 ## Notes
 
