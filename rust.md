@@ -15,15 +15,21 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 
 ## Must Know Crates
 
-- tokio <- async runtime
-- clap <- cli arg parsing
-- serde (and friends) <- struct to json/toml/etc
-- tracing (+ tracing-subscriber) <- logging
-- time <- datetime stuff
-- axum <- web server
-- regex <- regular expressions
-- rand <- random numbers
-- anyhow <- error handling
+| name                   | function                |
+| ---------------------- | ----------------------- |
+| tokio                  | async runtime           |
+| clap                   | cli arg parsing         |
+| serde (+ others)       | struct to json/toml/etc |
+| tracing (+ subscriber) | logging                 |
+| time                   | datetime stuff          |
+| axum                   | web server              |
+| regex                  | regular expressions     |
+| rand                   | random numbers          |
+| anyhow                 | error handling          |
+| config                 | configuration file      |
+| dirs                   | user directories        |
+| walk_dir               | to walk directories     |
+| rusqlite               | sqlite interface        |
 
 ## How to
 
@@ -41,6 +47,18 @@ for v in x {
 
 // Using filter_map
 let fsum = x.iter().filter_map(|v| v.map(|v| v)).fold(0, |s, e| s + e);
+```
+
+### Chose this or that (Optional) if they exists, else do something else
+
+```rust
+
+// .or_else is the main part
+let Some(editor) = env::var_os("VISUAL").or_else(|| env::var_os("EDITOR")) else {
+    println!("no editor found");
+};
+
+let _ = Command::new(editor).arg(path).status()?;
 ```
 
 ### Quickly convert a digit (0-9) into char
