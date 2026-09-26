@@ -1,5 +1,5 @@
 ---
-modified: Thu Oct 20 15:32:23 EDT 2022
+modified: Sun Aug 23 19:21:03 2026 -0400
 ---
 
 # Postgresql
@@ -14,6 +14,7 @@ modified: Thu Oct 20 15:32:23 EDT 2022
 
 - https://challahscript.com/what_i_wish_someone_told_me_about_postgres
 - https://www.raphaelbauer.com/posts/postgresql-everything/
+- https://www.augusteo.com/blog/how-pgbouncer-works/
 
 ## Notes
 
