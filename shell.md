@@ -83,20 +83,18 @@ where,
 
 ## if/else
 
-```bash
-if [ <test> ]; then <something>; fi
-```
-
-for command sucess | fail, simply do this (no sq brackets)
+To check command's sucess or failure, simply do this:
 
 ```bash
 if command; then <sucess>; else <fail>; fi
 ```
 
-To check if an environment variable exists
+To check if an something exists (or not):
 
 ```bash
-if [[ -z $ENV_VAR ]]; then echo "Not exists"; fi;
+if [[ -n $(cmd) ]]; then echo "Got some output"; fi;
+
+if [[ -z $ENV_VAR ]]; then echo "No output"; fi;
 ```
 
 ## for loop

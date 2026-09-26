@@ -33,6 +33,22 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 
 ## How to
 
+### Run rust as standalone script
+
+```bash
+#!/usr/bin/env -S cargo +nightly -Zscript -q
+---cargo
+[package]
+edition = "2024"
+
+[dependencies]
+serde_json = "*"
+---
+fn main() {
+    println("this is a script!");
+}
+```
+
 ### Discard None (Optional) values in a loop
 
 ```rust
