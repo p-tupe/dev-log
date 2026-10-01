@@ -80,11 +80,48 @@ let _ = Command::new(editor).arg(path).status()?;
 
 ## How to
 
-### Embed a file into a binary
+### Optimize release binary
+
+In the project's `cargo.toml`:
+
+```toml
+[profile.release]
+# remove symbol names (and DWARF) from the binary — smaller, but backtraces lose function names [default: "none"]
+strip = "symbols"
+# optimize across crates, not just within one — "thin" gets most of "fat"'s gain for far less link time [default: false]
+lto = "thin"
+# compile the crate as a single unit so LLVM sees the whole thing — better code, slower build [default: 16]
+codegen-units = 1
+# panic terminates instead of unwinding the stack — smaller/faster, but no catch_unwind and no unwind cleanup [default: "unwind"]
+panic = "abort"
+```
+
+### Embed a file into the binary
 
 ```rust
 let embedded_file = include_str!("./path/to/file");
 ```
+
+Can use this to add README as doc string
+
+```rust
+#![doc = include_str!("../README.md")]
+```
+
+### Build a cross-platform executable
+
+> See [cross](https://github.com/cross-rs/cross) for complex usecases
+
+```bash
+# change os and arch as required
+docker run --platform os/arch --rm \
+    -v "$PWD":/usr/src/app -w /usr/src/app \
+    rust:latest cargo build --release
+```
+
+### Run rust from a (minimal) docker file
+
+- [github.com code-example](https://github.com/p-tupe/code-examples/tree/main/rust/with-docker)
 
 ### Run rust as standalone script
 
@@ -94,7 +131,7 @@ let embedded_file = include_str!("./path/to/file");
 [dependencies]
 serde_json = "*"
 ---
-fn main() { println("this is a script!"); }
+fn main() {}
 ```
 
 ### Quickly convert a digit (0-9) into char
