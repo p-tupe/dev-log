@@ -17,10 +17,11 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 
 | name                   | function                |
 | ---------------------- | ----------------------- |
-| tokio                  | async runtime           |
+| tokio +full            | async runtime           |
 | clap                   | cli arg parsing         |
-| serde (+ others)       | struct to json/toml/etc |
-| tracing (+ subscriber) | logging                 |
+| serde +derive          | struct to json/toml/etc |
+| tracing (& subscriber) | logging in axum         |
+| log (& env_logger)     | logging in general      |
 | time                   | datetime stuff          |
 | axum                   | web server              |
 | regex                  | regular expressions     |
@@ -29,7 +30,8 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 | config                 | configuration file      |
 | dirs                   | user directories        |
 | walk_dir               | to walk directories     |
-| rusqlite               | sqlite interface        |
+| rusqlite               | basic sqlite            |
+| sqlx                   | async sqlite            |
 
 ## Crash course on Result/Option handling nomenclature
 
@@ -145,20 +147,15 @@ fn main() {}
 > https://doc.rust-lang.org/stable/rust-by-example/std_misc/file/read_lines.html
 
 ```rust
-use std::{
-    fs::File,
-    io::{BufRead, BufReader, Result},
-};
-
-fn main() -> Result<()> {
-    let file = File::open("./cargo.toml")?;
-    let line = String::new();
-    for line in BufReader::new(file).lines() {
-        println!("{}", line?);
-    }
-    Ok(())
+let file = File::open("./cargo.toml")?;
+for line in BufReader::new(file).lines() {
+    println!("{}", line?);
 }
 
+BufReader::new(File::open("./cargo.toml")?)
+    .lines()
+    .map_while(Result::ok)
+    .for_each(|l| println!("{}", l));
 ```
 
 ## State-Type Pattern
