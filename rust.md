@@ -1,5 +1,5 @@
 ---
-modified: "Sat May  9 10:26:00 EDT 2026"
+modified: Sun Oct 4 12:05:37 2026 -0400
 ---
 
 # Rust
@@ -15,43 +15,25 @@ modified: "Sat May  9 10:26:00 EDT 2026"
 
 ## Must Know Crates
 
-| name                   | function                |
-| ---------------------- | ----------------------- |
-| tokio +full            | async runtime           |
-| clap                   | cli arg parsing         |
-| serde +derive          | struct to json/toml/etc |
-| tracing (& subscriber) | logging in axum         |
-| log (& env_logger)     | logging in general      |
-| time                   | datetime stuff          |
-| axum                   | web server              |
-| regex                  | regular expressions     |
-| rand                   | random numbers          |
-| anyhow                 | error handling          |
-| config                 | configuration file      |
-| dirs                   | user directories        |
-| walk_dir               | to walk directories     |
-| rusqlite               | basic sqlite            |
-| sqlx                   | async sqlite            |
-
-## Crash course on Result/Option handling nomenclature
-
-```rust
-// Assume op on Result<Ok(Value), Err(Error)> or Option<Some(Value) | None>
-
-// ok*
-
-// unwrap*
-
-// *and*
-// *or*
-
-// *_else
-// *_then
-
-// map*
-// filter*
-// reduce*
-```
+| name                   | function               |
+| ---------------------- | ---------------------- |
+| tokio +full            | async runtime          |
+| clap                   | cli arg parsing        |
+| serde +derive          | (de)serialization glue |
+| serde_json             | json parser            |
+| quick_xml +serialize   | xml parser             |
+| tracing (& subscriber) | logging in axum        |
+| log (& env_logger)     | logging in general     |
+| time                   | datetime stuff         |
+| axum                   | web server             |
+| regex                  | regular expressions    |
+| rand                   | random numbers         |
+| anyhow                 | error handling         |
+| config                 | configuration file     |
+| dirs                   | more user directories  |
+| walk_dir               | to walk directories    |
+| sqlx                   | sqlite, postgres       |
+| reqwest/ureq +json     | http libs              |
 
 ### Discard None (Optional) values in a loop
 
@@ -78,6 +60,14 @@ let Some(editor) = env::var_os("VISUAL").or_else(|| env::var_os("EDITOR")) else 
 };
 
 let _ = Command::new(editor).arg(path).status()?;
+```
+
+### Conquer Command
+
+```rust
+Command::new(x).spawn()?;
+Command::new(x).output()?;
+Command::new(x).status()?;
 ```
 
 ## How to
