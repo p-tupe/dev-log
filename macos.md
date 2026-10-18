@@ -1,6 +1,7 @@
 ---
-modified: 2026-10-09 16:05:01.054307 -0400 EDT
+modified: Fri Oct 9 16:05:16 2026 -0400
 ---
+
 # macos
 
 ## Accent Keys
@@ -8,3 +9,5 @@ modified: 2026-10-09 16:05:01.054307 -0400 EDT
 - Option + <key> = ç
 - Option + e + <key> = é
 - Option + i + <key> = ê
+- Option + ` + <key> = è
+- Option + u + <key> = ë

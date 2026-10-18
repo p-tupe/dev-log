@@ -1,5 +1,5 @@
 ---
-modified: Sun Oct 4 12:05:37 2026 -0400
+modified: Fri Oct 9 16:05:16 2026 -0400
 ---
 
 # Rust
@@ -13,6 +13,8 @@ modified: Sun Oct 4 12:05:37 2026 -0400
 - https://github.com/rust-unofficial/awesome-rust <- Stuff made in rust
 - https://github.com/pretzelhammer/rust-blog <- Good stuff
 
+- https://benjamingeer.eu/en/post/hypermedia-rust/
+
 ## Must Know Crates
 
 | name                   | function               |
@@ -24,7 +26,7 @@ modified: Sun Oct 4 12:05:37 2026 -0400
 | quick_xml +serialize   | xml parser             |
 | tracing (& subscriber) | logging in axum        |
 | log (& env_logger)     | logging in general     |
-| time                   | datetime stuff         |
+| jiff                   | datetime stuff         |
 | axum                   | web server             |
 | regex                  | regular expressions    |
 | rand                   | random numbers         |
@@ -102,14 +104,17 @@ Can use this to add README as doc string
 
 ### Build a cross-platform executable
 
-> See [cross](https://github.com/cross-rs/cross) for complex usecases
+> As seen on [official docker rust image](https://hub.docker.com/_/rust/#compile-your-app-inside-the-docker-container)
 
 ```bash
 # change os and arch as required
-docker run --platform os/arch --rm \
+docker run --rm --platform os/arch --user "$(id -u)":"$(id -g)"  \
     -v "$PWD":/usr/src/app -w /usr/src/app \
-    rust:latest cargo build --release
+    rust:slim cargo build --release
+# use rust:alpine for static musl'd bin
 ```
+
+> See [cross](https://github.com/cross-rs/cross) for complex usecases (does not work on MacOS though :/)
 
 ### Run rust from a (minimal) docker file
 
