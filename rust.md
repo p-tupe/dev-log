@@ -20,7 +20,6 @@ modified: Fri Oct 9 16:05:16 2026 -0400
 | name                   | function               |
 | ---------------------- | ---------------------- |
 | tokio +full            | async runtime          |
-| clap                   | cli arg parsing        |
 | serde +derive          | (de)serialization glue |
 | serde_json             | json parser            |
 | quick_xml +serialize   | xml parser             |
@@ -31,48 +30,29 @@ modified: Fri Oct 9 16:05:16 2026 -0400
 | regex                  | regular expressions    |
 | rand                   | random numbers         |
 | anyhow                 | error handling         |
-| config                 | configuration file     |
+| confy                  | app configuration      |
 | dirs                   | more user directories  |
 | walk_dir               | to walk directories    |
 | sqlx                   | sqlite, postgres       |
 | reqwest/ureq +json     | http libs              |
+| clap                   | cli arg parsing        |
+| indicatif              | cli progress bars      |
 
-### Discard None (Optional) values in a loop
-
-```rust
-let x = [Some(1), None, Some(2), None, Some(3)];
-
-// Using let Some(x) = y else { continue }
-let mut sum = 0;
-for v in x {
-    let Some(v) = v else { continue };
-    sum += v;
-}
-
-// Using filter_map
-let fsum = x.iter().filter_map(|v| v.map(|v| v)).fold(0, |s, e| s + e);
-```
-
-### Chose this or that (Optional) if they exists, else do something else
-
-```rust
-// .or_else is the main part
-let Some(editor) = env::var_os("VISUAL").or_else(|| env::var_os("EDITOR")) else {
-    println!("no editor found");
-};
-
-let _ = Command::new(editor).arg(path).status()?;
-```
+## How to
 
 ### Conquer Command
 
 ```rust
-Command::new(x).spawn()?;
-Command::new(x).output()?;
-Command::new(x).status()?;
+Command::new(x).spawn()?; //  fire 'n forget
+Command::new(x).output()?; // fire 'n ... wait (includes status along with rest)
+Command::new(x).status()?; // wait until complete to see
 ```
 
-## How to
+### Get `Date.now()` JS equivalent
+
+```rust
+let now = std::time::SystemTime::now().duration_since(SystemTime::UNIX_EPOCH)?.as_millis();
+```
 
 ### Optimize release binary
 
