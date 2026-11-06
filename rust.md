@@ -12,7 +12,6 @@ modified: Fri Oct 9 16:05:16 2026 -0400
 - https://rust-lang-nursery.github.io/rust-cookbook/ <- How to use 'em
 - https://github.com/rust-unofficial/awesome-rust <- Stuff made in rust
 - https://github.com/pretzelhammer/rust-blog <- Good stuff
-
 - https://benjamingeer.eu/en/post/hypermedia-rust/
 
 ## Must Know Crates
@@ -44,8 +43,8 @@ modified: Fri Oct 9 16:05:16 2026 -0400
 
 ```rust
 Command::new(x).spawn()?; //  fire 'n forget
-Command::new(x).output()?; // fire 'n ... wait (includes status along with rest)
-Command::new(x).status()?; // wait until complete to see
+Command::new(x).status()?; // fire 'n .. wait until complete to see if worked or not
+Command::new(x).output()?; // wait to completion (includes status along with rest of dump)
 ```
 
 ### Get `Date.now()` JS equivalent
@@ -98,7 +97,7 @@ docker run --rm --platform os/arch --user "$(id -u)":"$(id -g)"  \
 
 ### Run rust from a (minimal) docker file
 
-- [github.com code-example](https://github.com/p-tupe/code-examples/tree/main/rust/with-docker)
+- [github.com code-example](https://github.com/p-tupe/code-examples/blob/main/rust/with-docker/Dockerfile)
 
 ### Run rust as standalone script
 
@@ -115,6 +114,8 @@ fn main() {}
 
 ```rust
 (digit + b'0') as char
+// To reverse
+char.to_digit(10) // 10: Radix, can be 2 - 26
 ```
 
 ### Buffer a file by line
@@ -127,10 +128,30 @@ for line in BufReader::new(file).lines() {
     println!("{}", line?);
 }
 
+// Same, functional
 BufReader::new(File::open("./cargo.toml")?)
     .lines()
     .map_while(Result::ok)
     .for_each(|l| println!("{}", l));
+
+// For a more memory-efficient version
+let file = File::open("./cargo.toml")?;
+let mut reader = BufReader::new(file);
+let mut line = String::new(); // Only a single line in memory allocated
+while reader.read_line(&mut line)? > 0 {
+    println!("{}", line);
+    line.clear(); // As long as it is cleared in time
+}
+```
+
+### Read a file if supplied or read from stdin (using clap for brevity)
+
+```rust
+#[derive(Parser)] // use clap::Parser;
+struct Cli { input_file: Option<String> }
+
+let input_text = cli.input_file.as_ref() // This holds input arg, if supplied
+    .map_or_else(|| io::read_to_string(io::stdin()), fs::read_to_string)?;
 ```
 
 ## State-Type Pattern
