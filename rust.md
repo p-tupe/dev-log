@@ -144,14 +144,12 @@ while reader.read_line(&mut line)? > 0 {
 }
 ```
 
-### Read a file if supplied or read from stdin (using clap for brevity)
+### Read a file if supplied or read from stdin
 
 ```rust
-#[derive(Parser)] // use clap::Parser;
-struct Cli { input_file: Option<String> }
-
-let input_text = cli.input_file.as_ref() // This holds input arg, if supplied
+let input = env::args().nth(1)
     .map_or_else(|| io::read_to_string(io::stdin()), fs::read_to_string)?;
+// Ctrl-D to end if stdin ip
 ```
 
 ## State-Type Pattern
