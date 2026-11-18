@@ -50,7 +50,8 @@ Command::new(x).output()?; // wait to completion (includes status along with res
 ### Get `Date.now()` JS equivalent
 
 ```rust
-let now = std::time::SystemTime::now().duration_since(SystemTime::UNIX_EPOCH)?.as_millis();
+let now = std::time::SystemTime::now()
+    .duration_since(SystemTime::UNIX_EPOCH)?.as_millis();
 ```
 
 ### Optimize release binary
@@ -59,13 +60,13 @@ In the project's `cargo.toml`:
 
 ```toml
 [profile.release]
-# remove symbol names (and DWARF) from the binary — smaller, but backtraces lose function names [default: "none"]
+# remove symbol names (and DWARF) from the binary
 strip = "symbols"
-# optimize across crates, not just within one — "thin" gets most of "fat"'s gain for far less link time [default: false]
+# optimize across crates
 lto = "thin"
-# compile the crate as a single unit so LLVM sees the whole thing — better code, slower build [default: 16]
+# compile the crate as a single unit
 codegen-units = 1
-# panic terminates instead of unwinding the stack — smaller/faster, but no catch_unwind and no unwind cleanup [default: "unwind"]
+# panic terminates instead of unwinding the stack
 panic = "abort"
 ```
 
@@ -154,8 +155,12 @@ let input = env::args().nth(1)
 
 ## State-Type Pattern
 
-- [priteshtupe.com/posts/rust-actors/](https://priteshtupe.com/posts/state-type-rust/)
+- [priteshtupe.com/posts/state-type-rust/](https://priteshtupe.com/posts/state-type-rust/)
 
 ### Actor Pattern
 
 - [priteshtupe.com/posts/rust-actors/](https://priteshtupe.com/posts/rust-actors/)
+
+### Cross-compile easily
+
+- [priteshtupe.com/posts/cargo-cross-compile/](https://priteshtupe.com/posts/cargo-cross-compile/)
