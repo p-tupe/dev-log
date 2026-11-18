@@ -1,0 +1,50 @@
+#!/usr/bin/env cargo +nightly -Zscript --quiet
+---
+[package]
+edition = "2024"
+[dependencies]
+clap = { version = "*", features = ["derive"]}
+regex = "*"
+---
+
+use clap::Parser;
+use core::error;
+use regex::Regex;
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
+
+#[derive(Parser)]
+/// Clean stroke/fill/width/style from svgs
+struct Cli {
+    #[arg(required = true, value_name = "SVG_FILE")]
+    input: Vec<PathBuf>,
+}
+
+static STRIP: LazyLock<Regex> = LazyLock::new(|| {
+    Regex::new(r#"(?s)<defs\b[^>]*/>|<defs\b[^>]*>.*?</defs>|\s(?:width|height|style)="[^"]*""#)
+        .unwrap()
+});
+
+static PAINT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"\s(stroke|fill)="[^"]*""#).unwrap());
+
+fn main() -> Result<(), Box<dyn error::Error>> {
+    let cli = Cli::parse();
+
+    println!("Cleaning svgs...");
+    fs::create_dir_all("./clean-svg/")?;
+
+    for i in cli.input {
+        println!("{}", i.to_string_lossy());
+        let content = fs::read_to_string(&i)?;
+        let stripped = STRIP.replace_all(&content, "");
+        let content = PAINT.replace_all(&stripped, r#" ${1}="currentColor""#);
+        let output = Path::new("./clean-svg/").join(i.file_name().ok_or("no file_name")?);
+        fs::write(output, content.as_ref())?;
+    }
+
+    println!("Done!");
+    Ok(())
+}
